@@ -422,6 +422,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerCapsule
       objectReference: {fileID: 0}
+    - target: {fileID: 8616685848737228376, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: m_Actions
+      value: 
+      objectReference: {fileID: -944628639613478452, guid: 4419d82f33d36e848b3ed5af4c8da37e, type: 3}
+    - target: {fileID: 8616685848737228376, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
+      propertyPath: m_NotificationBehavior
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8997996947095583982, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -467,7 +475,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 5393215578589016642, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
@@ -628,7 +637,7 @@ GameObject:
   - component: {fileID: 680566812}
   - component: {fileID: 680566811}
   m_Layer: 0
-  m_Name: Planos Agua
+  m_Name: Planos Agua Superior
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -721,7 +730,8 @@ Transform:
   m_LocalPosition: {x: 6.7471347, y: -4.00132, z: 21.068842}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1069463451}
   m_Father: {fileID: 1290694956}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &913430149
@@ -966,7 +976,7 @@ GameObject:
   - component: {fileID: 1069463449}
   - component: {fileID: 1069463448}
   m_Layer: 0
-  m_Name: Planos Agua
+  m_Name: Planos Agua Inferior
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1056,11 +1066,11 @@ Transform:
   m_GameObject: {fileID: 1069463447}
   serializedVersion: 2
   m_LocalRotation: {x: -1, y: -0, z: -0, w: 0}
-  m_LocalPosition: {x: 6.7471347, y: -4.00132, z: 21.068842}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1290694956}
+  m_Father: {fileID: 680566814}
   m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}
 --- !u!1001 &1156518053
 PrefabInstance:
@@ -1166,7 +1176,6 @@ Transform:
   m_Children:
   - {fileID: 974536824}
   - {fileID: 680566814}
-  - {fileID: 1069463451}
   - {fileID: 1670203777}
   - {fileID: 1958610018}
   - {fileID: 362446325}

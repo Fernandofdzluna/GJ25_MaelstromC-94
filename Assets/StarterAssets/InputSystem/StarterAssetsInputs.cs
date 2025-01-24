@@ -39,9 +39,9 @@ namespace StarterAssets
 			JumpInput(value.isPressed);
 		}
 
-		public void OnSprint(InputValue value)
+		public void OnInteract(InputValue value)
 		{
-			SprintInput(value.isPressed);
+            Interact();
 		}
 #endif
 
@@ -61,9 +61,9 @@ namespace StarterAssets
 			jump = newJumpState;
 		}
 
-		public void SprintInput(bool newSprintState)
+		public void Interact()
 		{
-			sprint = newSprintState;
+			Debug.Log("Funciona");
 		}
 		
 		private void OnApplicationFocus(bool hasFocus)
