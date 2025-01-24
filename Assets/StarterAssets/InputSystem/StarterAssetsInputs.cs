@@ -7,6 +7,8 @@ namespace StarterAssets
 {
 	public class StarterAssetsInputs : MonoBehaviour
 	{
+		private FirstPersonController script_Controller;
+
 		[Header("Character Input Values")]
 		public Vector2 move;
 		public Vector2 look;
@@ -20,8 +22,12 @@ namespace StarterAssets
 		public bool cursorLocked = true;
 		public bool cursorInputForLook = true;
 
+        private void Awake()
+        {
+            script_Controller = this.gameObject.GetComponent<FirstPersonController>();
+        }
 #if ENABLE_INPUT_SYSTEM
-		public void OnMove(InputValue value)
+        public void OnMove(InputValue value)
 		{
 			MoveInput(value.Get<Vector2>());
 		}
@@ -40,9 +46,9 @@ namespace StarterAssets
 		}
 
 		public void OnInteract(InputValue value)
-		{
-            Interact();
-		}
+        {
+			script_Controller.CheckRayCast();
+        }
 #endif
 
 
@@ -59,11 +65,6 @@ namespace StarterAssets
 		public void JumpInput(bool newJumpState)
 		{
 			jump = newJumpState;
-		}
-
-		public void Interact()
-		{
-			Debug.Log("Funciona");
 		}
 		
 		private void OnApplicationFocus(bool hasFocus)

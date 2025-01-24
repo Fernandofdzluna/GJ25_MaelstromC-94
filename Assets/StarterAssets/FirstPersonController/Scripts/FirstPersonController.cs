@@ -57,11 +57,15 @@ namespace StarterAssets
         private float _speed;
 		private float _rotationVelocity;
 		private float _verticalVelocity;
-		private float _terminalVelocity = 53.0f;
+		//private float _terminalVelocity = 53.0f;
 
 		// timeout deltatime
 		private float _jumpTimeoutDelta;
 		private float _fallTimeoutDelta;
+
+		GameObject pickedObject;
+		Transform hands;
+		bool objectPicked;
 
 
 #if ENABLE_INPUT_SYSTEM
@@ -92,6 +96,8 @@ namespace StarterAssets
 			{
 				_mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
 			}
+
+			hands = _mainCamera.gameObject.transform.GetChild(0).gameObject.transform;
 		}
 
 		private void Start()
@@ -113,8 +119,6 @@ namespace StarterAssets
 		private void Update()
 		{
 			Move();
-			CheckRayCast();
-
 
             if (_input.move != Vector2.zero)
 			{
@@ -128,7 +132,13 @@ namespace StarterAssets
 				perlinNoise.m_AmplitudeGain = amplitudFrecuencyStopped.x;
 				perlinNoise.m_FrequencyGain = amplitudFrecuencyStopped.y;
 			}
-		}
+
+            if (objectPicked)
+            {
+				pickedObject.transform.parent = hands.transform;
+				pickedObject.transform.localPosition = Vector3.zero;
+            }
+        }
 
 		private void LateUpdate()
 		{
@@ -223,7 +233,7 @@ namespace StarterAssets
 			Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
 		}
 
-		private void CheckRayCast()
+		public void CheckRayCast()
 		{
 			RaycastHit hit;
 			float distanceToObstacle = 0;
@@ -233,10 +243,11 @@ namespace StarterAssets
 			{
 				distanceToObstacle = hit.distance;
 
-				//if (hit.collider.TryGetComponent(out IUsable usable) && Input.GetMouseButtonDown(0))
-				//{
-
-				//}
+				if (hit.collider.tag == "Interactuable")
+				{
+					pickedObject = hit.collider.gameObject;
+                    objectPicked = true;
+				}
 			}
 		}
 	}
