@@ -52,13 +52,11 @@ namespace StarterAssets
             if (value.Get<float>() >= 1f)
             {
 				// button down
-				Debug.Log("Button Down");
                 script_Controller.CheckRayCast();
             }
             else
             {
 				// button up
-				Debug.Log("Button Up");
                 script_Controller.LeaveObject();
             }
         }

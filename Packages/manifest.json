@@ -13,7 +13,6 @@
     "com.unity.nuget.mono-cecil": "1.11.4",
     "com.unity.package-validation-suite": "0.22.0-preview",
     "com.unity.render-pipelines.core": "17.0.3",
-    "com.unity.render-pipelines.high-definition": "17.0.3",
     "com.unity.render-pipelines.universal": "17.0.3",
     "com.unity.render-pipelines.universal-config": "17.0.3",
     "com.unity.rendering.light-transport": "1.0.1",
