@@ -56,7 +56,7 @@ namespace StarterAssets
 		// player
 		private float _speed;
 		private float _rotationVelocity;
-		private float _verticalVelocity;
+        private float _verticalVelocity;
 		//private float _terminalVelocity = 53.0f;
 
 		// timeout deltatime
@@ -66,12 +66,13 @@ namespace StarterAssets
 		GameObject pickedObject;
 		Transform hands;
 		bool objectPicked;
-		bool onEscaleraButton;
-		bool onEscaleraMid;
-		bool onEscaleraTop;
+		public bool onEscalera;
+
+		Collider colliderPlayer;
+		GameObject Escalera;
 
 #if ENABLE_INPUT_SYSTEM
-		private PlayerInput _playerInput;
+        private PlayerInput _playerInput;
 #endif
 		private CharacterController _controller;
 		private StarterAssetsInputs _input;
@@ -100,8 +101,8 @@ namespace StarterAssets
 			}
 
 			hands = _mainCamera.gameObject.transform.GetChild(0).gameObject.transform;
-			onEscaleraButton = false;
-			onEscaleraTop = false;
+            colliderPlayer = this.gameObject.GetComponent<Collider>();
+			onEscalera = false;
 		}
 
 		private void Start()
@@ -121,11 +122,11 @@ namespace StarterAssets
 		}
 
 		private void Update()
-		{
-            if (!onEscaleraButton && !onEscaleraTop)
-            {
-                Move();
+        {
+            Move();
 
+            if (!onEscalera)
+            {
                 if (_input.move != Vector2.zero)
                 {
                     //Caminar
@@ -159,7 +160,7 @@ namespace StarterAssets
 
 		private void CameraRotation()
 		{
-            if (onEscaleraButton == false && onEscaleraTop == false)
+            if (!onEscalera)
             {
                 // if there is an input
                 if (_input.look.sqrMagnitude >= _threshold)
@@ -219,14 +220,27 @@ namespace StarterAssets
 
 			// note: Vector2's != operator uses approximation so is not floating point error prone, and is cheaper than magnitude
 			// if there is a move input rotate player when the player is moving
-			if (_input.move != Vector2.zero)
+			if (!onEscalera)
 			{
-				// move
-				inputDirection = transform.right * _input.move.x + transform.forward * _input.move.y;
-			}
+				if (_input.move != Vector2.zero)
+				{
+					// move
+					inputDirection = transform.right * _input.move.x + transform.forward * _input.move.y;
+				}
 
-			// move the player
-			_controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+				// move the player
+				_controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+			}
+			else
+			{
+				if (_input.move != Vector2.zero)
+				{
+					inputDirection = transform.up * _input.move.y;
+				}
+
+                // move the player
+                _controller.Move(inputDirection.normalized * (3 * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+            }
 		}
 
 		private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
@@ -248,7 +262,7 @@ namespace StarterAssets
 			Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
 		}
 
-		public void CheckRayCast()
+		public void CheckRayCast(string tecla)
 		{
 			RaycastHit hit;
 			float distanceToObstacle = 0;
@@ -257,34 +271,52 @@ namespace StarterAssets
 			if (Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.TransformDirection(Vector3.forward), out hit, 4))
 			{
 				distanceToObstacle = hit.distance;
-
 				switch (hit.collider.tag)
 				{
 					case "Interactuable":
-                        pickedObject = hit.collider.gameObject;
-                        pickedObject.transform.parent = hands.transform;
-                        objectPicked = true;
+						if (tecla == "clickIzq")
+						{
+							pickedObject = hit.collider.gameObject;
+							pickedObject.transform.parent = hands.transform;
+							objectPicked = true;
+						}
                         break;
 					case "Escalera":
-						GameObject escalera = hit.collider.gameObject;
-						Transform ButtonEscalera = escalera.transform.GetChild(0).transform;
-						Transform TopEscalera = escalera.transform.GetChild(1).transform;
-						float distance = Vector3.Distance(this.transform.position, ButtonEscalera.transform.position);
-						if (distance > Vector3.Distance(this.transform.position, TopEscalera.transform.position))
+						if (tecla == "E")
 						{
-							Debug.Log("Top escalera cerca de player");
-                            //Top escalera cerca de player
-                            this.transform.position = TopEscalera.transform.position;
-							this.transform.eulerAngles = Vector3.zero;
-                            onEscaleraTop = true;
-                        }
-						else
-						{
-                            Debug.Log("Button escalera cerca de player");
-                            //Button escalera cerca de player
-                            this.transform.position = ButtonEscalera.transform.position;
-                            this.transform.eulerAngles = Vector3.zero;
-                            onEscaleraButton = true;
+							Escalera = hit.collider.gameObject;
+							Transform ButtonEscalera = Escalera.transform.GetChild(0).transform;
+							Transform MidEscalera = Escalera.transform.GetChild(1).transform;
+							Transform TopEscalera = Escalera.transform.GetChild(2).transform;
+							float distanceButton = Vector3.Distance(this.transform.position, ButtonEscalera.transform.position);
+							float distanceMid = Vector3.Distance(this.transform.position, MidEscalera.transform.position);
+							float distanceTop = Vector3.Distance(this.transform.position, TopEscalera.transform.position);
+							if (distanceTop < distanceMid && distanceTop < distanceButton)
+							{
+								Debug.Log("Top escalera cerca de player");
+								//Top escalera cerca de player
+								this.gameObject.transform.position = TopEscalera.position;
+								this.transform.eulerAngles = Vector3.zero;
+                                onEscalera = true;
+							}
+							else if (distanceButton < distanceMid && distanceButton < distanceTop)
+							{
+								Debug.Log("Button escalera cerca de player");
+								//Button escalera cerca de player
+								this.gameObject.transform.position = ButtonEscalera.position;
+								this.transform.eulerAngles = Vector3.zero;
+                                onEscalera = true;
+							}
+							else
+							{
+								Debug.Log("Mid escalera cerca de player");
+								//Mid escalera cerca de player
+								this.gameObject.transform.position = MidEscalera.position;
+								this.transform.eulerAngles = Vector3.zero;
+                                onEscalera = true;
+							}
+
+                            colliderPlayer.excludeLayers = LayerMask.GetMask("SuelosEscaleras");
 						}
 						break;
 				}
@@ -299,6 +331,39 @@ namespace StarterAssets
                 hands.transform.DetachChildren();
 				pickedObject.transform.position = this.gameObject.transform.position;
             }
+        }
+
+		public void LeaveEscalera()
+		{
+            Transform ButtonEscalera = Escalera.transform.GetChild(0).transform;
+            Transform MidEscalera = Escalera.transform.GetChild(1).transform;
+            Transform TopEscalera = Escalera.transform.GetChild(2).transform;
+            float distanceButton = Vector3.Distance(this.transform.position, ButtonEscalera.transform.position);
+            float distanceMid = Vector3.Distance(this.transform.position, MidEscalera.transform.position);
+            float distanceTop = Vector3.Distance(this.transform.position, TopEscalera.transform.position);
+            if (distanceTop < distanceMid && distanceTop < distanceButton)
+            {
+                Debug.Log("Top");
+                //Top escalera cerca de player
+                this.gameObject.transform.position = TopEscalera.position;
+                onEscalera = false;
+            }
+            else if (distanceButton < distanceMid && distanceButton < distanceTop)
+            {
+                Debug.Log("Button");
+                //Button escalera cerca de player
+                this.gameObject.transform.position = ButtonEscalera.position;
+                onEscalera = false;
+            }
+            else
+            {
+                Debug.Log("Mid");
+                //Mid escalera cerca de player
+                this.gameObject.transform.position = MidEscalera.position;
+                onEscalera = false;
+            }
+
+            colliderPlayer.excludeLayers = LayerMask.GetMask("Nothing");
         }
 	}
 }

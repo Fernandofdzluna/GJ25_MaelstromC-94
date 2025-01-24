@@ -52,7 +52,7 @@ namespace StarterAssets
             if (value.Get<float>() >= 1f)
             {
 				// button down
-                script_Controller.CheckRayCast();
+                script_Controller.CheckRayCast("clickIzq");
             }
             else
             {
@@ -63,7 +63,14 @@ namespace StarterAssets
 
 		public void OnGrab(InputValue value)
 		{
-            script_Controller.CheckRayCast();
+			if (script_Controller.onEscalera == false)
+            {
+                script_Controller.CheckRayCast("E");
+            }
+			else
+			{
+				script_Controller.LeaveEscalera();
+			}
         }
 #endif
 
