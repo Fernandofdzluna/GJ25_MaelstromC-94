@@ -45,16 +45,16 @@ namespace StarterAssets
 		[Tooltip("How far in degrees can you move the camera down")]
 		public float BottomClamp;
 
-        // cinemachine
-        [Space(20)]
+		// cinemachine
+		[Space(20)]
 		public CinemachineVirtualCamera camaraCinemachine;
 		CinemachineBasicMultiChannelPerlin perlinNoise;
 		public Vector2 amplitudFrecuencyStopped;
 		public Vector2 amplitudFrecuencyWalking;
-        private float _cinemachineTargetPitch;
+		private float _cinemachineTargetPitch;
 
-        // player
-        private float _speed;
+		// player
+		private float _speed;
 		private float _rotationVelocity;
 		private float _verticalVelocity;
 		//private float _terminalVelocity = 53.0f;
@@ -110,17 +110,17 @@ namespace StarterAssets
 			Debug.LogError( "Starter Assets package is missing dependencies. Please use Tools/Starter Assets/Reinstall Dependencies to fix it");
 #endif
 
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+			Cursor.lockState = CursorLockMode.Locked;
+			Cursor.visible = false;
 
-            perlinNoise = camaraCinemachine.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-        }
+			perlinNoise = camaraCinemachine.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+		}
 
 		private void Update()
 		{
 			Move();
 
-            if (_input.move != Vector2.zero)
+			if (_input.move != Vector2.zero)
 			{
 				//Caminar
 				perlinNoise.m_AmplitudeGain = amplitudFrecuencyWalking.x;
@@ -133,12 +133,12 @@ namespace StarterAssets
 				perlinNoise.m_FrequencyGain = amplitudFrecuencyStopped.y;
 			}
 
-            if (objectPicked)
-            {
-				pickedObject.transform.parent = hands.transform;
+			if (objectPicked)
+			{
 				pickedObject.transform.localPosition = Vector3.zero;
-            }
-        }
+				pickedObject.transform.eulerAngles = Vector3.zero;
+			}
+		}
 
 		private void LateUpdate()
 		{
@@ -246,9 +246,20 @@ namespace StarterAssets
 				if (hit.collider.tag == "Interactuable")
 				{
 					pickedObject = hit.collider.gameObject;
+                    pickedObject.transform.parent = hands.transform;
                     objectPicked = true;
 				}
 			}
 		}
+
+		public void LeaveObject()
+		{
+            if (objectPicked)
+            {
+				objectPicked = false;
+                hands.transform.DetachChildren();
+				pickedObject.transform.position = this.gameObject.transform.position;
+            }
+        }
 	}
 }
