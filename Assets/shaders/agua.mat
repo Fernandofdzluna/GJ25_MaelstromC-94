@@ -60,6 +60,10 @@ Material:
     - _foamAmount: 0.8
     - _foamOrilla: 0.19
     - _foamShoreWidth: 0.7
+    - _voroiAgitation: 1
+    - _voroiPower: 8.02
+    - _voroiScale: 1
+    - _voroiSpeed: -0.5
     - _waveIntensity: 0.06
     - _waveSpeed: 5
     m_Colors:
@@ -68,6 +72,8 @@ Material:
     - _causticColor: {r: 2.297397, g: 2.297397, b: 2.297397, a: 0}
     - _mainCOlor: {r: 0, g: 0.427015, b: 0.7056604, a: 0}
     - _velocityfoam: {r: 0, g: 0.1, b: 0, a: 0}
+    - _voroi: {r: 1, g: 1, b: 1, a: 0.5647059}
+    - _voroiTilling: {r: 3, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &1253302569120037747
