@@ -67,6 +67,7 @@ namespace StarterAssets
 		Transform hands;
 		bool objectPicked;
 		bool onEscaleraButton;
+		bool onEscaleraMid;
 		bool onEscaleraTop;
 
 #if ENABLE_INPUT_SYSTEM
