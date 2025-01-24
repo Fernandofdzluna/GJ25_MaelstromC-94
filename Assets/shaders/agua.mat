@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: agua
+  m_Shader: {fileID: -6465566751694194690, guid: 6f8c36e422500134bb711ebb6869e335, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 2
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses:
+  - MOTIONVECTORS
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _Caustictexture:
+        m_Texture: {fileID: 2800000, guid: 8f2876e1c189be94fa5467f3f03b6fe5, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _FoamTexture:
+        m_Texture: {fileID: 2800000, guid: dfe26c85e91651f4daad625806e930bd, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _CausticTilling: 1.25
+    - _FoamDepth: 1.8
+    - _FoamFalloff: 2.7
+    - _FoamTilling: 0.99
+    - _QueueControl: 0
+    - _QueueOffset: 0
+    - _alpha: 1
+    - _causticSpeed: 0.05
+    - _cauticOrilla: 0.07
+    - _depth: 1
+    - _depthFallout: 2
+    - _foamAmount: 0.8
+    - _foamOrilla: 0.19
+    - _foamShoreWidth: 0.7
+    - _waveIntensity: 0.06
+    - _waveSpeed: 5
+    m_Colors:
+    - _FoamCOlor: {r: 1, g: 1, b: 1, a: 0}
+    - _ShortColor: {r: 0.078933276, g: 0.4498039, b: 0.5333333, a: 0}
+    - _causticColor: {r: 2.297397, g: 2.297397, b: 2.297397, a: 0}
+    - _mainCOlor: {r: 0, g: 0.427015, b: 0.7056604, a: 0}
+    - _velocityfoam: {r: 0, g: 0.1, b: 0, a: 0}
+  m_BuildTextureStacks: []
+  m_AllowLocking: 1
+--- !u!114 &1253302569120037747
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 9
