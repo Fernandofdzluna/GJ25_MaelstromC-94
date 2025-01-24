@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CinemachineTarget
   - Interactuable
+  - Escalera
   layers:
   - Default
   - TransparentFX

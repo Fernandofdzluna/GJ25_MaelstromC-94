@@ -60,6 +60,11 @@ namespace StarterAssets
                 script_Controller.LeaveObject();
             }
         }
+
+		public void OnGrab(InputValue value)
+		{
+            script_Controller.CheckRayCast();
+        }
 #endif
 
 

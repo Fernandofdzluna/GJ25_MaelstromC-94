@@ -66,7 +66,8 @@ namespace StarterAssets
 		GameObject pickedObject;
 		Transform hands;
 		bool objectPicked;
-
+		bool onEscaleraButton;
+		bool onEscaleraTop;
 
 #if ENABLE_INPUT_SYSTEM
 		private PlayerInput _playerInput;
@@ -98,6 +99,8 @@ namespace StarterAssets
 			}
 
 			hands = _mainCamera.gameObject.transform.GetChild(0).gameObject.transform;
+			onEscaleraButton = false;
+			onEscaleraTop = false;
 		}
 
 		private void Start()
@@ -118,22 +121,30 @@ namespace StarterAssets
 
 		private void Update()
 		{
-			Move();
+            if (!onEscaleraButton && !onEscaleraTop)
+            {
+                Move();
 
-			if (_input.move != Vector2.zero)
-			{
-				//Caminar
-				perlinNoise.m_AmplitudeGain = amplitudFrecuencyWalking.x;
-				perlinNoise.m_FrequencyGain = amplitudFrecuencyWalking.y;
-			}
+                if (_input.move != Vector2.zero)
+                {
+                    //Caminar
+                    perlinNoise.m_AmplitudeGain = amplitudFrecuencyWalking.x;
+                    perlinNoise.m_FrequencyGain = amplitudFrecuencyWalking.y;
+                }
+                else
+                {
+                    //Quieto
+                    perlinNoise.m_AmplitudeGain = amplitudFrecuencyStopped.x;
+                    perlinNoise.m_FrequencyGain = amplitudFrecuencyStopped.y;
+                }
+            }
 			else
 			{
-				//Quieto
-				perlinNoise.m_AmplitudeGain = amplitudFrecuencyStopped.x;
-				perlinNoise.m_FrequencyGain = amplitudFrecuencyStopped.y;
-			}
+                perlinNoise.m_AmplitudeGain = amplitudFrecuencyStopped.x;
+                perlinNoise.m_FrequencyGain = amplitudFrecuencyStopped.y;
+            }
 
-			if (objectPicked)
+            if (objectPicked)
 			{
 				pickedObject.transform.localPosition = Vector3.zero;
 				pickedObject.transform.eulerAngles = Vector3.zero;
@@ -147,24 +158,27 @@ namespace StarterAssets
 
 		private void CameraRotation()
 		{
-			// if there is an input
-			if (_input.look.sqrMagnitude >= _threshold)
-			{
-				//Don't multiply mouse input by Time.deltaTime
-				float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
+            if (onEscaleraButton == false && onEscaleraTop == false)
+            {
+                // if there is an input
+                if (_input.look.sqrMagnitude >= _threshold)
+                {
+                    //Don't multiply mouse input by Time.deltaTime
+                    float deltaTimeMultiplier = IsCurrentDeviceMouse ? 1.0f : Time.deltaTime;
 
-				_cinemachineTargetPitch += _input.look.y * RotationSpeed * deltaTimeMultiplier;
-				_rotationVelocity = _input.look.x * RotationSpeed * deltaTimeMultiplier;
+                    _cinemachineTargetPitch += _input.look.y * RotationSpeed * deltaTimeMultiplier;
+                    _rotationVelocity = _input.look.x * RotationSpeed * deltaTimeMultiplier;
 
-				// clamp our pitch rotation
-				_cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
+                    // clamp our pitch rotation
+                    _cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
 
-				// Update Cinemachine camera target pitch
-				CinemachineCameraTarget.transform.localRotation = Quaternion.Euler(_cinemachineTargetPitch, 0.0f, 0.0f);
+                    // Update Cinemachine camera target pitch
+                    CinemachineCameraTarget.transform.localRotation = Quaternion.Euler(_cinemachineTargetPitch, 0.0f, 0.0f);
 
-				// rotate the player left and right
-				transform.Rotate(Vector3.up * _rotationVelocity);
-			}
+                    // rotate the player left and right
+                    transform.Rotate(Vector3.up * _rotationVelocity);
+                }
+            }
 		}
 
 		private void Move()
@@ -243,11 +257,35 @@ namespace StarterAssets
 			{
 				distanceToObstacle = hit.distance;
 
-				if (hit.collider.tag == "Interactuable")
+				switch (hit.collider.tag)
 				{
-					pickedObject = hit.collider.gameObject;
-                    pickedObject.transform.parent = hands.transform;
-                    objectPicked = true;
+					case "Interactuable":
+                        pickedObject = hit.collider.gameObject;
+                        pickedObject.transform.parent = hands.transform;
+                        objectPicked = true;
+                        break;
+					case "Escalera":
+						GameObject escalera = hit.collider.gameObject;
+						Transform ButtonEscalera = escalera.transform.GetChild(0).transform;
+						Transform TopEscalera = escalera.transform.GetChild(1).transform;
+						float distance = Vector3.Distance(this.transform.position, ButtonEscalera.transform.position);
+						if (distance > Vector3.Distance(this.transform.position, TopEscalera.transform.position))
+						{
+							Debug.Log("Top escalera cerca de player");
+                            //Top escalera cerca de player
+                            this.transform.position = TopEscalera.transform.position;
+							this.transform.eulerAngles = Vector3.zero;
+                            onEscaleraTop = true;
+                        }
+						else
+						{
+                            Debug.Log("Button escalera cerca de player");
+                            //Button escalera cerca de player
+                            this.transform.position = ButtonEscalera.transform.position;
+                            this.transform.eulerAngles = Vector3.zero;
+                            onEscaleraButton = true;
+						}
+						break;
 				}
 			}
 		}
