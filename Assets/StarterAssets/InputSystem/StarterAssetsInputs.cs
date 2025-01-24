@@ -1,6 +1,8 @@
+using System;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 #endif
 
 namespace StarterAssets
@@ -47,7 +49,18 @@ namespace StarterAssets
 
 		public void OnInteract(InputValue value)
         {
-			script_Controller.CheckRayCast();
+            if (value.Get<float>() >= 1f)
+            {
+				// button down
+				Debug.Log("Button Down");
+                script_Controller.CheckRayCast();
+            }
+            else
+            {
+				// button up
+				Debug.Log("Button Up");
+                script_Controller.LeaveObject();
+            }
         }
 #endif
 
