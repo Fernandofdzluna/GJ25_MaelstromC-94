@@ -6,11 +6,12 @@ using UnityEngine;
 public class PostWater1 : MonoBehaviour
 {
     FirstPersonController script_FristPersonController;
-    bool ahogandose;
 
     public GameObject waterGlobalVolume; // Asigna aquí el objeto con el componente Volume.
     public Transform movingObject; // Asigna aquí el transform del objeto que se mueve constantemente.
     public Transform player; // Asigna aquí el transform del jugador.
+    public GameObject respiracionPostPro;
+    public Aguantar aguantar_script;
     public bool cintura, ojos = false; // Booleano para indicar si el jugador está a la altura de la cintura.
 
     private float playerHeight;
@@ -20,7 +21,9 @@ public class PostWater1 : MonoBehaviour
     private void Start()
     {
         script_FristPersonController = player.gameObject.GetComponent<FirstPersonController>();
-        ahogandose = false;
+        script_FristPersonController.ahogandose = false;
+
+        aguantar_script = respiracionPostPro.GetComponent<Aguantar>();
 
         if (waterGlobalVolume != null)
         {
@@ -62,9 +65,8 @@ public class PostWater1 : MonoBehaviour
                 {
                     waterGlobalVolume.SetActive(true);
                     ojos = true;
-                    Debug.Log("Volumen activado: objeto alcanzó 5/6 de la altura.");
                     script_FristPersonController.MoveSpeed = 1;
-                    ahogandose= true;
+                    script_FristPersonController.ahogandose = true;
                     StartCoroutine(ahogarCorrutina());
                 }
             }
@@ -74,9 +76,8 @@ public class PostWater1 : MonoBehaviour
                 {
                     waterGlobalVolume.SetActive(false);
                     ojos = false;
-                    Debug.Log("Volumen desactivado: objeto por debajo de 5/6 de la altura.");
                     script_FristPersonController.MoveSpeed = 4;
-                    ahogandose= false;
+                    script_FristPersonController.ahogandose = false;
                 }
             }
         }
@@ -91,7 +92,6 @@ public class PostWater1 : MonoBehaviour
                 if (!cintura)
                 {
                     cintura = true;
-                    Debug.Log("Booleano cintura activado.");
                     script_FristPersonController.MoveSpeed = 2.5f;
                 }
             }
@@ -100,7 +100,6 @@ public class PostWater1 : MonoBehaviour
                 if (cintura)
                 {
                     cintura = false;
-                    Debug.Log("Booleano cintura desactivado.");
                     script_FristPersonController.MoveSpeed = 4;
                 }
             }
@@ -109,17 +108,26 @@ public class PostWater1 : MonoBehaviour
 
     IEnumerator ahogarCorrutina()
     {
-        if(ahogandose)
+        if(script_FristPersonController.ahogandose)
         {
-            script_FristPersonController.tiempoBucalRespirador -= 1;
-            script_FristPersonController.Breath(false);
+            if (script_FristPersonController.hasMascaraRespiracion)
+            {
+                script_FristPersonController.tiempoBucalRespirador -= 1;
+                script_FristPersonController.Breath(false);
+            }
+            else
+            {
+                aguantar_script.ApplyWithout(true);
+            }
         }
         yield return new WaitForSeconds(1);
-        if(ahogandose)
+        if(script_FristPersonController.ahogandose)
         {
             if (script_FristPersonController.tiempoBucalRespirador <= 0)
             {
-                script_FristPersonController.DeathPlayer();
+                script_FristPersonController.mascaraRespiracion.SetActive(false);
+                script_FristPersonController.hasMascaraRespiracion = false;
+                aguantar_script.ApplyWithout(true);
             }
             else
             {

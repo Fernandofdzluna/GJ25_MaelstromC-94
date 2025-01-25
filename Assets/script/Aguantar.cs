@@ -1,3 +1,5 @@
+using StarterAssets;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
@@ -23,7 +25,8 @@ public class Aguantar : MonoBehaviour
     public float countdownTime = 20f;   // Tiempo total del contador (en segundos)
     public float shakeTimer;             // Tiempo restante para la sacudida de la cámara
 
-    public PostWater1 otherScript;  // Referencia al otro script que controla el inicio del efecto
+    FirstPersonController firstPerson_script;  // Referencia al otro script que controla el inicio del efecto
+    EndGame endGame_Script;
 
     private void Start()
     {
@@ -41,6 +44,10 @@ public class Aguantar : MonoBehaviour
         }
 
         shakeTimer = countdownTime;  // Iniciar el contador
+
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        firstPerson_script = player.GetComponent<FirstPersonController>();
+        endGame_Script = this.gameObject.GetComponent<EndGame>();
     }
 
     private void Update()
@@ -54,34 +61,63 @@ public class Aguantar : MonoBehaviour
             // Si el contador aún tiene tiempo, aplicar efectos
             if (shakeTimer > 0)
             {
-                ApplyWithout();
+                StartCoroutine(VigneteIn(true));
             }
             else
             {
                 // Al finalizar el contador, activar el booleano
                 isEffectActive = false;
+                if (isEffectActive == false)
+                endGame_Script.EndTheGame();
             }
         }
     }
 
-    private void ApplyCameraShake(float intensity)
+    public void ApplyWithout(bool bSubir)
     {
-        
+        if (bSubir)
+        {
+            // Ajustar la saturación y viñeta a medida que el contador baja
+            //float saturation = Mathf.Lerp(initialSaturation, finalSaturation, (countdownTime - shakeTimer) / countdownTime);
+            //colorAdjustments.saturation.value = saturation;
+
+            //float vignetteIntensity = Mathf.Lerp(initialVignette, finalVignette, (countdownTime - shakeTimer) / countdownTime);
+            //vignette.intensity.value = vignetteIntensity;
+
+            //isEffectActive = true;
+            StartCoroutine(VigneteIn(true));
+        }
+        else
+        {
+            StartCoroutine(VigneteIn(false));
+        }
     }
 
-    public void ApplyWithout()
+    IEnumerator VigneteIn(bool bSubir)
     {
-        // Calcular la intensidad de la sacudida de la cámara
-        //float shakeFactor = Mathf.Lerp(initialShakeIntensity, shakeIntensity, (countdownTime - shakeTimer) / countdownTime);
-        //ApplyCameraShake(shakeFactor);
-
-        // Ajustar la saturación y viñeta a medida que el contador baja
-        float saturation = Mathf.Lerp(initialSaturation, finalSaturation, (countdownTime - shakeTimer) / countdownTime);
-        colorAdjustments.saturation.value = saturation;
-
-        float vignetteIntensity = Mathf.Lerp(initialVignette, finalVignette, (countdownTime - shakeTimer) / countdownTime);
-        vignette.intensity.value = vignetteIntensity;
-
-        isEffectActive = true;
+        if (bSubir)
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                colorAdjustments.saturation.value += 0.01f;
+                vignette.intensity.value += 0.01f;
+                yield return new WaitForSeconds(0.2f);
+                if (firstPerson_script.ahogandose == false)
+                {
+                }
+            }
+            firstPerson_script.DeathPlayer();
+        }
+        /*else
+        {
+            for (int i = 0; i < 25; i++)
+            {
+                tempColor.a -= 0.04f;
+                yield return new WaitForSeconds(0.2f);
+                imagenAMostrar.color = tempColor;
+            }
+            final = false;
+        }*/
+        yield return null;
     }
 }

@@ -57,7 +57,7 @@ namespace StarterAssets
 		public GameObject BarraRoja;
         RectTransform barraRojaRespiración;
 		float maxBarraRojaWidth;
-		bool hasMascaraRespiracion;
+		public bool hasMascaraRespiracion;
 		public float tiempoBucalRespirador = 30;
 		float unidadBarraRoja;
 
@@ -69,6 +69,7 @@ namespace StarterAssets
 
 		Collider colliderPlayer;
 		GameObject Escalera;
+		public bool ahogandose = false;
 
 #if ENABLE_INPUT_SYSTEM
         private PlayerInput _playerInput;
@@ -135,25 +136,33 @@ namespace StarterAssets
         {
             Move();
 
-            if (!onEscalera)
+            if (!hasMascaraRespiracion && ahogandose)
             {
-                if (_input.move != Vector2.zero)
+                perlinNoise.m_AmplitudeGain += 0.3f * Time.deltaTime;
+                perlinNoise.m_FrequencyGain += 0.3f * Time.deltaTime;
+            }
+            else
+			{
+                if (!onEscalera)
                 {
-                    //Caminar
-                    perlinNoise.m_AmplitudeGain = amplitudFrecuencyWalking.x;
-                    perlinNoise.m_FrequencyGain = amplitudFrecuencyWalking.y;
+                    if (_input.move != Vector2.zero)
+                    {
+                        //Caminar
+                        perlinNoise.m_AmplitudeGain = amplitudFrecuencyWalking.x;
+                        perlinNoise.m_FrequencyGain = amplitudFrecuencyWalking.y;
+                    }
+                    else
+                    {
+                        //Quieto
+                        perlinNoise.m_AmplitudeGain = amplitudFrecuencyStopped.x;
+                        perlinNoise.m_FrequencyGain = amplitudFrecuencyStopped.y;
+                    }
                 }
                 else
                 {
-                    //Quieto
                     perlinNoise.m_AmplitudeGain = amplitudFrecuencyStopped.x;
                     perlinNoise.m_FrequencyGain = amplitudFrecuencyStopped.y;
                 }
-            }
-			else
-			{
-                perlinNoise.m_AmplitudeGain = amplitudFrecuencyStopped.x;
-                perlinNoise.m_FrequencyGain = amplitudFrecuencyStopped.y;
             }
 
             if (objectPicked)
@@ -414,7 +423,7 @@ namespace StarterAssets
 
 		public void DeathPlayer()
 		{
-
+			Debug.Log("Jugador Muerto");
 		}
 	}
 }

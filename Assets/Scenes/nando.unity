@@ -575,6 +575,8 @@ MonoBehaviour:
   waterGlobalVolume: {fileID: 369771648}
   movingObject: {fileID: 680566814}
   player: {fileID: 488963529044210885}
+  respiracionPostPro: {fileID: 820397329}
+  aguantar_script: {fileID: 1005720978}
   cintura: 0
   ojos: 0
 --- !u!54 &405611259
@@ -1559,6 +1561,10 @@ PrefabInstance:
       value: RespiracionPostPo
       objectReference: {fileID: 0}
     - target: {fileID: 3447937813704115577, guid: 9827fa99fea92c24ebf9212b8e3e0daa, type: 3}
+      propertyPath: scriptCount
+      value: 
+      objectReference: {fileID: 1005720978}
+    - target: {fileID: 3447937813704115577, guid: 9827fa99fea92c24ebf9212b8e3e0daa, type: 3}
       propertyPath: imagenAMostrar
       value: 
       objectReference: {fileID: 348307290}
@@ -1663,12 +1669,11 @@ MonoBehaviour:
   shakeIntensity: 0.1
   initialShakeIntensity: 0.1
   initialSaturation: 0
-  initialVignette: 0.05
+  initialVignette: 0.15
   finalSaturation: -100
   finalVignette: 1
-  countdownTime: 20
+  countdownTime: 10
   shakeTimer: 0
-  otherScript: {fileID: 405611258}
 --- !u!1 &1069463447
 GameObject:
   m_ObjectHideFlags: 0
