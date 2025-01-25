@@ -18,6 +18,7 @@ public class PostWater1 : MonoBehaviour
     private float waistHeight;
     private float thresholdHeight;
 
+
     private void Start()
     {
         script_FristPersonController = player.gameObject.GetComponent<FirstPersonController>();
@@ -57,28 +58,41 @@ public class PostWater1 : MonoBehaviour
         if (movingObject != null && waterGlobalVolume != null)
         {
             float movingObjectY = movingObject.position.y;
-
+            thresholdHeight = player.position.y + (5 * playerHeight / 6); // Altura de 5/6 del cuerpo.
             // Activa el volumen si el objeto que sube alcanza la altura de 5/6 o más.
             if (movingObjectY >= thresholdHeight)
             {
-                if (!waterGlobalVolume.activeSelf)
+                //if (!waterGlobalVolume.activeSelf)
+                //{
+                //    waterGlobalVolume.SetActive(true);
+                //    ojos = true;
+                //    script_FristPersonController.MoveSpeed = 1;
+                //    script_FristPersonController.ahogandose = true;
+                //    StartCoroutine(ahogarCorrutina());
+                //}
+
+                waterGlobalVolume.SetActive(true);
+                script_FristPersonController.MoveSpeed = 1;
+                script_FristPersonController.ahogandose = true;
+                if (ojos == false)
                 {
-                    waterGlobalVolume.SetActive(true);
-                    ojos = true;
-                    script_FristPersonController.MoveSpeed = 1;
-                    script_FristPersonController.ahogandose = true;
                     StartCoroutine(ahogarCorrutina());
                 }
+                ojos = true;
             }
             else
             {
-                if (waterGlobalVolume.activeSelf)
-                {
-                    waterGlobalVolume.SetActive(false);
-                    ojos = false;
-                    script_FristPersonController.MoveSpeed = 4;
-                    script_FristPersonController.ahogandose = false;
-                }
+                //if (waterGlobalVolume.activeSelf)
+                //{
+                //    waterGlobalVolume.SetActive(false);
+                //    ojos = false;
+                //    script_FristPersonController.MoveSpeed = 4;
+                //    script_FristPersonController.ahogandose = false;
+                //}
+                waterGlobalVolume.SetActive(false);
+                ojos = false;
+                script_FristPersonController.MoveSpeed = 4;
+                script_FristPersonController.ahogandose = false;
             }
         }
 

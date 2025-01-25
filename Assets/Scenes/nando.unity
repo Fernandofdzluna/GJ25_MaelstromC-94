@@ -539,7 +539,7 @@ GameObject:
   - component: {fileID: 405611260}
   - component: {fileID: 405611259}
   - component: {fileID: 405611258}
-  m_Layer: 4
+  m_Layer: 6
   m_Name: ColliderPlano
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -945,7 +945,7 @@ GameObject:
   - component: {fileID: 680566813}
   - component: {fileID: 680566812}
   - component: {fileID: 680566815}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Planos Agua Superior
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1681,7 +1681,7 @@ GameObject:
   - component: {fileID: 1069463450}
   - component: {fileID: 1069463449}
   - component: {fileID: 1069463448}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Planos Agua Inferior
   m_TagString: Untagged
   m_Icon: {fileID: 0}

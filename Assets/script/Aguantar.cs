@@ -62,7 +62,7 @@ public class Aguantar : MonoBehaviour
             {
                 colorAdjustments.saturation.value -= 0.1f;
                 vignette.intensity.value += 0.01f;
-                yield return new WaitForSeconds(0.05f);
+                yield return new WaitForSeconds(0.08f);
                 if (firstPerson_script.ahogandose == false || firstPerson_script.hasMascaraRespiracion)
                 {
                     StartCoroutine(VigneteIn(false));
