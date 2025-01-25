@@ -51,21 +51,9 @@ public class EndGame : MonoBehaviour
                 if(firstPersonController.ahogandose == false)
                 {
                     StartCoroutine(fadeIn(false));
-                    scriptCount.ApplyWithout(false);
                     yield break;
                 }
             }
-            firstPersonController.DeathPlayer();
-        }
-        else
-        {
-            for (int i = 0; i< 25; i++)
-            {
-                tempColor.a -= 0.04f;
-                yield return new WaitForSeconds(0.2f);
-                imagenAMostrar.color = tempColor;
-            }
-            final = false;
         }
     }
 }

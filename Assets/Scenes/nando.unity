@@ -1665,15 +1665,9 @@ MonoBehaviour:
   globalWater: {fileID: 680566810}
   mainCamera: {fileID: 488963529044210886}
   globalVolume: {fileID: 369771650}
-  isEffectActive: 0
-  shakeIntensity: 0.1
-  initialShakeIntensity: 0.1
   initialSaturation: 0
   initialVignette: 0.15
-  finalSaturation: -100
-  finalVignette: 1
-  countdownTime: 10
-  shakeTimer: 0
+  countdownTime: 2
 --- !u!1 &1069463447
 GameObject:
   m_ObjectHideFlags: 0
