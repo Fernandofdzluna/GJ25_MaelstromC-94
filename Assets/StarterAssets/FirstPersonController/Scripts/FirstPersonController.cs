@@ -52,11 +52,17 @@ namespace StarterAssets
 		private float _jumpTimeoutDelta;
 		private float _fallTimeoutDelta;
 
-		public GameObject mascaraRespiracion;
+        [Space(20)]
+        public GameObject mascaraRespiracion;
+		public GameObject BarraRoja;
+        RectTransform barraRojaRespiración;
+		float maxBarraRojaWidth;
 		bool hasMascaraRespiracion;
 		public float tiempoBucalRespirador = 30;
+		float unidadBarraRoja;
 
-		GameObject pickedObject;
+        [Space(20)]
+        GameObject pickedObject;
 		Transform hands;
 		bool objectPicked;
 		public bool onEscalera;
@@ -99,6 +105,14 @@ namespace StarterAssets
 
 			hasMascaraRespiracion = false;
 			mascaraRespiracion.SetActive(false);
+
+			if (BarraRoja == null)
+			{
+                Debug.LogError("Barra roja no encontrada");
+            }
+			barraRojaRespiración = BarraRoja.GetComponent<RectTransform>();
+			maxBarraRojaWidth = barraRojaRespiración.sizeDelta.x;
+			unidadBarraRoja = maxBarraRojaWidth / tiempoBucalRespirador;
 		}
 
 		private void Start()
@@ -313,7 +327,6 @@ namespace StarterAssets
 						}
 						break;
 					case "Respirador":
-						Debug.Log("Dentro");
 						if (!hasMascaraRespiracion)
 						{
 							mascaraRespiracion.SetActive(true);
@@ -327,6 +340,7 @@ namespace StarterAssets
 							{
 								tiempoBucalRespirador = 30;
 								Destroy(hit.collider.gameObject);
+								Breath(true);
 							}
 						}
 						break;
@@ -385,6 +399,18 @@ namespace StarterAssets
 
             colliderPlayer.excludeLayers = LayerMask.GetMask("Nothing");
         }
+
+		public void Breath(bool add)
+		{
+			if (add)
+			{
+                barraRojaRespiración.sizeDelta = new Vector2(maxBarraRojaWidth, barraRojaRespiración.sizeDelta.y);
+            }
+			else
+			{
+                barraRojaRespiración.sizeDelta -= new Vector2(unidadBarraRoja, 0);
+            }
+		}
 
 		public void DeathPlayer()
 		{

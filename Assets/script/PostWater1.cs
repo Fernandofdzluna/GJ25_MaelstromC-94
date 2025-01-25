@@ -112,6 +112,7 @@ public class PostWater1 : MonoBehaviour
         if(ahogandose)
         {
             script_FristPersonController.tiempoBucalRespirador -= 1;
+            script_FristPersonController.Breath(false);
         }
         yield return new WaitForSeconds(1);
         if(ahogandose)
