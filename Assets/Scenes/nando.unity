@@ -522,6 +522,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e1752f738febc24c9e2970ad3cf28a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BombonasARecoger: 0
+  textoBombonasMax: {fileID: 0}
 --- !u!1 &405611256
 GameObject:
   m_ObjectHideFlags: 0
@@ -1140,6 +1142,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 750289013}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &820397329 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 849399060987072978, guid: 9827fa99fea92c24ebf9212b8e3e0daa, type: 3}
+  m_PrefabInstance: {fileID: 1005720975}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &882127556
 GameObject:
   m_ObjectHideFlags: 0
@@ -1596,6 +1603,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5879900013405168584, guid: 9827fa99fea92c24ebf9212b8e3e0daa, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5879900013405168584, guid: 9827fa99fea92c24ebf9212b8e3e0daa, type: 3}
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 488963529044210886}
@@ -1619,16 +1630,45 @@ PrefabInstance:
       propertyPath: lensDistortionTime
       value: 0.05
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5879900013405168584, guid: 9827fa99fea92c24ebf9212b8e3e0daa, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 849399060987072978, guid: 9827fa99fea92c24ebf9212b8e3e0daa, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1005720978}
   m_SourcePrefab: {fileID: 100100000, guid: 9827fa99fea92c24ebf9212b8e3e0daa, type: 3}
 --- !u!4 &1005720976 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4758618965285611208, guid: 9827fa99fea92c24ebf9212b8e3e0daa, type: 3}
   m_PrefabInstance: {fileID: 1005720975}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1005720978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 820397329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 911bf39776d9c344d92f586d5fd4b0db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  globalWater: {fileID: 680566810}
+  mainCamera: {fileID: 488963529044210886}
+  globalVolume: {fileID: 369771650}
+  isEffectActive: 0
+  shakeIntensity: 0.1
+  initialShakeIntensity: 0.1
+  initialSaturation: 0
+  initialVignette: 0.05
+  finalSaturation: -100
+  finalVignette: 1
+  countdownTime: 20
+  shakeTimer: 0
+  otherScript: {fileID: 405611258}
 --- !u!1 &1069463447
 GameObject:
   m_ObjectHideFlags: 0

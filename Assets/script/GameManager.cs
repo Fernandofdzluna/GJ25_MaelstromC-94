@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 
     private void OnEnable()
     {
-        textoBombonasMax.SetText("");
+        //textoBombonasMax.SetText("");
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
