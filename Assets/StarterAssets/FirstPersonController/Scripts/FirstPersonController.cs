@@ -77,6 +77,7 @@ namespace StarterAssets
 		private CharacterController _controller;
 		private StarterAssetsInputs _input;
 		private GameObject _mainCamera;
+		public Aguantar aguantar_script;
 
 		private const float _threshold = 0.01f;
 
@@ -341,13 +342,15 @@ namespace StarterAssets
 							mascaraRespiracion.SetActive(true);
 							hasMascaraRespiracion = true;
 							tiempoBucalRespirador = 30;
-							Destroy(hit.collider.gameObject);
+                            Breath(true);
+                            Destroy(hit.collider.gameObject);
 						}
 						else
 						{
 							if(tiempoBucalRespirador < 30)
 							{
 								tiempoBucalRespirador = 30;
+								Breath(true);
 								Destroy(hit.collider.gameObject);
 								Breath(true);
 							}
@@ -418,6 +421,12 @@ namespace StarterAssets
 			else
 			{
                 barraRojaRespiración.sizeDelta -= new Vector2(unidadBarraRoja, 0);
+				if (tiempoBucalRespirador <= 0)
+                {
+                    mascaraRespiracion.SetActive(false);
+                    hasMascaraRespiracion = false;
+					aguantar_script.ApplyWithout(true);
+                }
             }
 		}
 

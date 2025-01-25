@@ -119,20 +119,8 @@ public class PostWater1 : MonoBehaviour
             {
                 aguantar_script.ApplyWithout(true);
             }
-        }
-        yield return new WaitForSeconds(1);
-        if(script_FristPersonController.ahogandose)
-        {
-            if (script_FristPersonController.tiempoBucalRespirador <= 0)
-            {
-                script_FristPersonController.mascaraRespiracion.SetActive(false);
-                script_FristPersonController.hasMascaraRespiracion = false;
-                aguantar_script.ApplyWithout(true);
-            }
-            else
-            {
-                StartCoroutine(ahogarCorrutina());
-            }
+            yield return new WaitForSeconds(1);
+            StartCoroutine(ahogarCorrutina());
         }
         else
         {
