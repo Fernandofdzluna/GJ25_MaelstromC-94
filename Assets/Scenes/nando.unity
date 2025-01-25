@@ -2626,6 +2626,10 @@ PrefabInstance:
       propertyPath: BarraRoja
       value: 
       objectReference: {fileID: 1179977613}
+    - target: {fileID: 135561167482553608, guid: 55c7115410e06464a8282713e8816c7d, type: 3}
+      propertyPath: aguantar_script
+      value: 
+      objectReference: {fileID: 1005720978}
     - target: {fileID: 1348605796931479400, guid: 55c7115410e06464a8282713e8816c7d, type: 3}
       propertyPath: m_IsActive
       value: 0
