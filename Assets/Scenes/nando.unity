@@ -371,6 +371,7 @@ MonoBehaviour:
   movingObject: {fileID: 680566814}
   player: {fileID: 488963529044210885}
   cintura: 0
+  ojos: 0
 --- !u!54 &405611259
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -616,6 +617,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 579265827}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &654623374 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1348605796931479400, guid: 55c7115410e06464a8282713e8816c7d, type: 3}
+  m_PrefabInstance: {fileID: 488963529044210884}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &680566810
 GameObject:
   m_ObjectHideFlags: 0
@@ -1969,6 +1975,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 135561167482553608, guid: 55c7115410e06464a8282713e8816c7d, type: 3}
+      propertyPath: mascaraRespiracion
+      value: 
+      objectReference: {fileID: 654623374}
+    - target: {fileID: 1348605796931479400, guid: 55c7115410e06464a8282713e8816c7d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2990535453408028686, guid: 55c7115410e06464a8282713e8816c7d, type: 3}
       propertyPath: m_Name
       value: ----PlayerSystem----
