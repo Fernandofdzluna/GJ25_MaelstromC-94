@@ -1,9 +1,9 @@
 using UnityEngine;
 
-public class agua_subiendo : MonoBehaviour
+public class agua_subiendo_2 : MonoBehaviour
 {
-    [Tooltip("Velocidad de elevación del plano (metros por segundo).")]
-    public float elevationSpeed = 1f;
+    [Tooltip("Tiempo que deseas que tarde en alcanzar la altura máxima (segundos).")]
+    public float timeToMaxHeight = 300f;
 
     [Tooltip("Tiempo de inicio de la elevación en segundos.")]
     public float startDelay = 0f;
@@ -11,14 +11,19 @@ public class agua_subiendo : MonoBehaviour
     [Tooltip("Altura máxima que el plano alcanzará.")]
     public float maxHeight = 10f;
 
+    private float elevationSpeed; // Velocidad calculada automáticamente
     private float elapsedTime = 0f; // Tiempo acumulado desde que empezó la elevación
     private bool isElevating = false; // Indica si el plano debe empezar a elevarse
     private Vector3 initialPosition; // Posición inicial del plano
 
     void Start()
     {
+        // Calcular la velocidad de elevación basada en el tiempo deseado y la altura máxima
+        elevationSpeed = maxHeight / timeToMaxHeight;
+
         // Guardar la posición inicial del plano
         initialPosition = transform.position;
+
         // Iniciar el temporizador tras el retraso configurado
         StartCoroutine(StartElevationAfterDelay());
     }
