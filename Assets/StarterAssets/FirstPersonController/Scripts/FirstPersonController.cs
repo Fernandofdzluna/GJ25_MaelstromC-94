@@ -299,7 +299,7 @@ namespace StarterAssets
                                 controller.enabled = false;
                                 this.gameObject.transform.position = TopEscalera.position;
                                 controller.enabled = true;
-                                this.transform.eulerAngles = Vector3.zero;
+                                this.transform.eulerAngles = new Vector3(0, 90, 0);
                                 onEscalera = true;
 							}
 							else if (distanceButton < distanceMid && distanceButton < distanceTop)
@@ -310,7 +310,7 @@ namespace StarterAssets
 								controller.enabled = false;
 								this.gameObject.transform.position = ButtonEscalera.position;
                                 controller.enabled = true;
-                                this.transform.eulerAngles = Vector3.zero;
+                                this.transform.eulerAngles = new Vector3(0, 90, 0);
                                 onEscalera = true;
 							}
 							else
@@ -321,7 +321,7 @@ namespace StarterAssets
                                 controller.enabled = false;
                                 this.gameObject.transform.position = MidEscalera.position;
                                 controller.enabled = true;
-                                this.transform.eulerAngles = Vector3.zero;
+                                this.transform.eulerAngles = new Vector3(0,90,0);
                                 onEscalera = true;
 							}
 
