@@ -1,7 +1,9 @@
+using StarterAssets;
 using UnityEngine;
 
 public class PostWater : MonoBehaviour
 {
+    FirstPersonController script_FristPersonController;
     public GameObject waterGlobalVolume; // Asigna aquí el objeto con el componente Volume.
     public Transform movingObject; // Asigna aquí el transform del objeto que se mueve constantemente.
     public Transform player; // Asigna aquí el transform del jugador.
@@ -10,6 +12,11 @@ public class PostWater : MonoBehaviour
     private float playerHeight;
     private float waistHeight;
     private float thresholdHeight;
+
+    private void Awake()
+    {
+        script_FristPersonController = player.gameObject.GetComponent<FirstPersonController>();
+    }
 
     private void Start()
     {
@@ -53,6 +60,7 @@ public class PostWater : MonoBehaviour
                 {
                     waterGlobalVolume.SetActive(true);
                     Debug.Log("Volumen activado: objeto alcanzó 5/6 de la altura.");
+                    script_FristPersonController.MoveSpeed = 1;
                 }
             }
             else
@@ -61,6 +69,7 @@ public class PostWater : MonoBehaviour
                 {
                     waterGlobalVolume.SetActive(false);
                     Debug.Log("Volumen desactivado: objeto por debajo de 5/6 de la altura.");
+                    script_FristPersonController.MoveSpeed = 4;
                 }
             }
         }
@@ -76,6 +85,7 @@ public class PostWater : MonoBehaviour
                 {
                     cintura = true;
                     Debug.Log("Booleano cintura activado.");
+                    script_FristPersonController.MoveSpeed = 2;
                 }
             }
             else
@@ -84,6 +94,7 @@ public class PostWater : MonoBehaviour
                 {
                     cintura = false;
                     Debug.Log("Booleano cintura desactivado.");
+                    script_FristPersonController.MoveSpeed = 4;
                 }
             }
         }
