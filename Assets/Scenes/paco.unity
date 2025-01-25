@@ -716,6 +716,59 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1187911246
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1187911248}
+  - component: {fileID: 1187911247}
+  m_Layer: 0
+  m_Name: Respiracion
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1187911247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1187911246}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2dbe1c857ce9d2947ae879485a6ac475, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  globalWater: {fileID: 2040337666}
+  mainCamera: {fileID: 1336083800}
+  globalVolume: {fileID: 1543606898}
+  isEffectActive: 0
+  shakeIntensity: 0.1
+  initialShakeIntensity: 0.1
+  initialSaturation: 0
+  initialVignette: 0
+  otherScript: {fileID: 1710108771}
+--- !u!4 &1187911248
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1187911246}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 11.296275, y: -14.668029, z: 7.0957065}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1237495576
 GameObject:
   m_ObjectHideFlags: 0
@@ -932,6 +985,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!20 &1336083800 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 2005952130888056267, guid: 55c7115410e06464a8282713e8816c7d, type: 3}
+  m_PrefabInstance: {fileID: 620969415}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1392110095
 GameObject:
   m_ObjectHideFlags: 0
@@ -1596,6 +1654,7 @@ MonoBehaviour:
   movingObject: {fileID: 2040337670}
   player: {fileID: 459977266}
   cintura: 0
+  ojos: 0
 --- !u!1 &2014337281
 GameObject:
   m_ObjectHideFlags: 0
@@ -1827,7 +1886,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eda7b566ea44f3747815165fd88501a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToMaxHeight: 300
+  timeToMaxHeight: 50
   startDelay: 0
   maxHeight: 10
 --- !u!1660057539 &9223372036854775807
@@ -1849,3 +1908,4 @@ SceneRoots:
   - {fileID: 936296964}
   - {fileID: 1543606899}
   - {fileID: 620969415}
+  - {fileID: 1187911248}

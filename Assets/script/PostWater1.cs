@@ -1,22 +1,15 @@
-using StarterAssets;
 using UnityEngine;
 
-public class PostWater : MonoBehaviour
+public class PostWater1 : MonoBehaviour
 {
-    FirstPersonController script_FristPersonController;
     public GameObject waterGlobalVolume; // Asigna aquí el objeto con el componente Volume.
     public Transform movingObject; // Asigna aquí el transform del objeto que se mueve constantemente.
     public Transform player; // Asigna aquí el transform del jugador.
-    public bool cintura = false; // Booleano para indicar si el jugador está a la altura de la cintura.
+    public bool cintura, ojos = false; // Booleano para indicar si el jugador está a la altura de la cintura.
 
     private float playerHeight;
     private float waistHeight;
     private float thresholdHeight;
-
-    private void Awake()
-    {
-        script_FristPersonController = player.gameObject.GetComponent<FirstPersonController>();
-    }
 
     private void Start()
     {
@@ -59,8 +52,8 @@ public class PostWater : MonoBehaviour
                 if (!waterGlobalVolume.activeSelf)
                 {
                     waterGlobalVolume.SetActive(true);
+                    ojos = true;
                     Debug.Log("Volumen activado: objeto alcanzó 5/6 de la altura.");
-                    script_FristPersonController.MoveSpeed = 1;
                 }
             }
             else
@@ -68,8 +61,8 @@ public class PostWater : MonoBehaviour
                 if (waterGlobalVolume.activeSelf)
                 {
                     waterGlobalVolume.SetActive(false);
+                    ojos = false;
                     Debug.Log("Volumen desactivado: objeto por debajo de 5/6 de la altura.");
-                    script_FristPersonController.MoveSpeed = 4;
                 }
             }
         }
@@ -85,7 +78,6 @@ public class PostWater : MonoBehaviour
                 {
                     cintura = true;
                     Debug.Log("Booleano cintura activado.");
-                    script_FristPersonController.MoveSpeed = 2;
                 }
             }
             else
@@ -94,7 +86,6 @@ public class PostWater : MonoBehaviour
                 {
                     cintura = false;
                     Debug.Log("Booleano cintura desactivado.");
-                    script_FristPersonController.MoveSpeed = 4;
                 }
             }
         }
