@@ -7,14 +7,15 @@ TagManager:
   - CinemachineTarget
   - Interactuable
   - Escalera
+  - agua
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
+  - SuelosEscaleras
   - 
   - 
   - 

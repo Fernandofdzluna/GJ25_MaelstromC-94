@@ -3,41 +3,47 @@ using System.Collections;
 
 public class lucesEmergencia : MonoBehaviour
 {
-    public Light emergencyLight; // Referencia a la luz que se modificará
-    public Color color1 = Color.red; // Primer color (por defecto rojo)
-    public Color color2 = Color.blue; // Segundo color (por defecto azul)
-    public float changeInterval = 0.5f; // Intervalo de cambio en segundos
+    // Variables configurables desde el Inspector
 
-    private bool isColor1 = true; // Variable para alternar entre colores
+    public Light emergencyLight; // Referencia a la luz
+    public float maxIntensity = 5f; // Intensidad máxima de la luz
+    public float minIntensity = 0f; // Intensidad mínima de la luz
+    public float pulseSpeed = 2f; // Velocidad del parpadeo
+
+    private bool isIncreasing = true; // Controla si la intensidad está aumentando o disminuyendo
 
     void Start()
     {
+        // Si no se asigna la luz en el Inspector, se usa la luz del objeto al que está asignado el script
         if (emergencyLight == null)
         {
             emergencyLight = GetComponent<Light>();
-            if (emergencyLight == null)
-            {
-                Debug.LogError("No se encontró una luz. Asigna una luz al script.");
-                return;
-            }
         }
-
-        // Inicia la rutina de cambio de color
-        StartCoroutine(ChangeLightColor());
     }
 
-    private IEnumerator ChangeLightColor()
+    void Update()
     {
-        while (true) // Bucle infinito para el cambio continuo
+        if (emergencyLight != null)
         {
-            // Cambia el color de la luz
-            emergencyLight.color = isColor1 ? color1 : color2;
-
-            // Alterna entre color1 y color2
-            isColor1 = !isColor1;
-
-            // Espera el tiempo definido antes de cambiar
-            yield return new WaitForSeconds(changeInterval);
+            // Aumentar o disminuir la intensidad según el estado
+            if (isIncreasing)
+            {
+                emergencyLight.intensity += pulseSpeed * Time.deltaTime;
+                if (emergencyLight.intensity >= maxIntensity)
+                {
+                    emergencyLight.intensity = maxIntensity;
+                    isIncreasing = false; // Cambiar de aumentar a disminuir
+                }
+            }
+            else
+            {
+                emergencyLight.intensity -= pulseSpeed * Time.deltaTime;
+                if (emergencyLight.intensity <= minIntensity)
+                {
+                    emergencyLight.intensity = minIntensity;
+                    isIncreasing = true; // Cambiar de disminuir a aumentar
+                }
+            }
         }
     }
 }
