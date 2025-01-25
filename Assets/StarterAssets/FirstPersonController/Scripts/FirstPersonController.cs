@@ -54,6 +54,7 @@ namespace StarterAssets
 
 		public GameObject mascaraRespiracion;
 		bool hasMascaraRespiracion;
+		public float tiempoBucalRespirador = 30;
 
 		GameObject pickedObject;
 		Transform hands;
@@ -317,7 +318,16 @@ namespace StarterAssets
 						{
 							mascaraRespiracion.SetActive(true);
 							hasMascaraRespiracion = true;
+							tiempoBucalRespirador = 30;
 							Destroy(hit.collider.gameObject);
+						}
+						else
+						{
+							if(tiempoBucalRespirador < 30)
+							{
+								tiempoBucalRespirador = 30;
+								Destroy(hit.collider.gameObject);
+							}
 						}
 						break;
 				}
@@ -375,5 +385,10 @@ namespace StarterAssets
 
             colliderPlayer.excludeLayers = LayerMask.GetMask("Nothing");
         }
+
+		public void DeathPlayer()
+		{
+
+		}
 	}
 }

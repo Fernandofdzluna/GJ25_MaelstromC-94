@@ -1,7 +1,13 @@
+using StarterAssets;
+using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PostWater1 : MonoBehaviour
 {
+    FirstPersonController script_FristPersonController;
+    bool ahogandose;
+
     public GameObject waterGlobalVolume; // Asigna aquí el objeto con el componente Volume.
     public Transform movingObject; // Asigna aquí el transform del objeto que se mueve constantemente.
     public Transform player; // Asigna aquí el transform del jugador.
@@ -13,6 +19,9 @@ public class PostWater1 : MonoBehaviour
 
     private void Start()
     {
+        script_FristPersonController = player.gameObject.GetComponent<FirstPersonController>();
+        ahogandose = false;
+
         if (waterGlobalVolume != null)
         {
             // Asegúrate de que el volumen esté desactivado inicialmente.
@@ -54,6 +63,9 @@ public class PostWater1 : MonoBehaviour
                     waterGlobalVolume.SetActive(true);
                     ojos = true;
                     Debug.Log("Volumen activado: objeto alcanzó 5/6 de la altura.");
+                    script_FristPersonController.MoveSpeed = 1;
+                    ahogandose= true;
+                    StartCoroutine(ahogarCorrutina());
                 }
             }
             else
@@ -63,6 +75,8 @@ public class PostWater1 : MonoBehaviour
                     waterGlobalVolume.SetActive(false);
                     ojos = false;
                     Debug.Log("Volumen desactivado: objeto por debajo de 5/6 de la altura.");
+                    script_FristPersonController.MoveSpeed = 4;
+                    ahogandose= false;
                 }
             }
         }
@@ -78,6 +92,7 @@ public class PostWater1 : MonoBehaviour
                 {
                     cintura = true;
                     Debug.Log("Booleano cintura activado.");
+                    script_FristPersonController.MoveSpeed = 2.5f;
                 }
             }
             else
@@ -86,8 +101,33 @@ public class PostWater1 : MonoBehaviour
                 {
                     cintura = false;
                     Debug.Log("Booleano cintura desactivado.");
+                    script_FristPersonController.MoveSpeed = 4;
                 }
             }
+        }
+    }
+
+    IEnumerator ahogarCorrutina()
+    {
+        if(ahogandose)
+        {
+            script_FristPersonController.tiempoBucalRespirador -= 1;
+        }
+        yield return new WaitForSeconds(1);
+        if(ahogandose)
+        {
+            if (script_FristPersonController.tiempoBucalRespirador <= 0)
+            {
+                script_FristPersonController.DeathPlayer();
+            }
+            else
+            {
+                StartCoroutine(ahogarCorrutina());
+            }
+        }
+        else
+        {
+            yield break;
         }
     }
 }
