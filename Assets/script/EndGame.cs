@@ -5,7 +5,8 @@ using System.Collections;
 public class EndGame : MonoBehaviour
 {
     public Image imagenAMostrar; // Referencia a la imagen que quieres mostrar
-    public Aguantar1 scriptCount; // Referencia al script Count
+    //public Aguantar1 scriptCount; // Referencia al script Count
+    public Aguantar scriptCount; // Referencia al script Count
 
     public float tiempoTransicion = 1f; // Tiempo en segundos que dura la transición
     private float tiempoTranscurrido = 0f;

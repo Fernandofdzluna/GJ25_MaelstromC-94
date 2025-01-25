@@ -278,11 +278,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3725548838002468683, guid: 55c7115410e06464a8282713e8816c7d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 11.7
+      value: 10.49
       objectReference: {fileID: 0}
     - target: {fileID: 3725548838002468683, guid: 55c7115410e06464a8282713e8816c7d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -28.08
+      value: -21.582287
       objectReference: {fileID: 0}
     - target: {fileID: 3725548838002468683, guid: 55c7115410e06464a8282713e8816c7d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1539,7 +1539,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: bb5f4e09dbfb48d459e2449b4cba48fd, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1613,6 +1613,36 @@ MonoBehaviour:
   player: {fileID: 459977266}
   cintura: 0
   ojos: 0
+--- !u!1 &1788393028 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 849399060987072978, guid: 9827fa99fea92c24ebf9212b8e3e0daa, type: 3}
+  m_PrefabInstance: {fileID: 6859395768101552783}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1788393032
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1788393028}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 911bf39776d9c344d92f586d5fd4b0db, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  globalWater: {fileID: 2040337666}
+  mainCamera: {fileID: 1336083800}
+  globalVolume: {fileID: 1543606898}
+  isEffectActive: 0
+  shakeIntensity: 0.1
+  initialShakeIntensity: 0.1
+  initialSaturation: 0
+  initialVignette: 0.15
+  finalSaturation: -100
+  finalVignette: 1
+  countdownTime: 20
+  shakeTimer: 0
+  otherScript: {fileID: 1710108771}
 --- !u!1 &2014337281
 GameObject:
   m_ObjectHideFlags: 0
@@ -1957,6 +1987,10 @@ PrefabInstance:
       value: RespiracionPostPo
       objectReference: {fileID: 0}
     - target: {fileID: 3447937813704115577, guid: 9827fa99fea92c24ebf9212b8e3e0daa, type: 3}
+      propertyPath: scriptCount
+      value: 
+      objectReference: {fileID: 1788393032}
+    - target: {fileID: 3447937813704115577, guid: 9827fa99fea92c24ebf9212b8e3e0daa, type: 3}
       propertyPath: imagenAMostrar
       value: 
       objectReference: {fileID: 920722552}
@@ -2001,6 +2035,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5879900013405168584, guid: 9827fa99fea92c24ebf9212b8e3e0daa, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5879900013405168584, guid: 9827fa99fea92c24ebf9212b8e3e0daa, type: 3}
       propertyPath: mainCamera
       value: 
       objectReference: {fileID: 1336083800}
@@ -2019,7 +2057,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 849399060987072978, guid: 9827fa99fea92c24ebf9212b8e3e0daa, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1788393032}
   m_SourcePrefab: {fileID: 100100000, guid: 9827fa99fea92c24ebf9212b8e3e0daa, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
