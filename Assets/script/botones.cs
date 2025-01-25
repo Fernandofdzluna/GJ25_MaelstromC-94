@@ -1,12 +1,12 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class botones : MonoBehaviour
+public class MenuController : MonoBehaviour
 {
     // Empty Object para opciones
     public GameObject optionsMenu;
 
-    // Otro Empty Object a activar cuando se desactiva optionsMenu
+    // Otro Empty Object a activar/desactivar
     public GameObject alternateMenu;
 
     // Nombre de la escena que se quiere cargar
@@ -25,22 +25,18 @@ public class botones : MonoBehaviour
         }
     }
 
-    // Método para activar/desactivar el menú de opciones
+    // Método para activar/desactivar el menú de opciones y alternar con alternateMenu
     public void ToggleOptionsMenu()
     {
-        if (optionsMenu != null)
+        if (optionsMenu != null && alternateMenu != null)
         {
-            bool isActive = optionsMenu.activeSelf;
-            optionsMenu.SetActive(!isActive);
-
-            if (alternateMenu != null)
-            {
-                alternateMenu.SetActive(isActive); // Activar alternateMenu si optionsMenu se desactiva
-            }
+            bool isOptionsActive = optionsMenu.activeSelf;
+            optionsMenu.SetActive(!isOptionsActive);
+            alternateMenu.SetActive(isOptionsActive); // Ocurre en viceversa
         }
         else
         {
-            Debug.LogError("El objeto 'optionsMenu' no está asignado en el inspector.");
+            Debug.LogError("Los objetos 'optionsMenu' o 'alternateMenu' no están asignados en el inspector.");
         }
     }
 
