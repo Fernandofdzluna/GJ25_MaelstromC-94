@@ -294,25 +294,34 @@ namespace StarterAssets
 							if (distanceTop < distanceMid && distanceTop < distanceButton)
 							{
 								Debug.Log("Top escalera cerca de player");
-								//Top escalera cerca de player
-								this.gameObject.transform.position = TopEscalera.position;
-								this.transform.eulerAngles = Vector3.zero;
+                                //Top escalera cerca de player
+                                CharacterController controller = this.GetComponent<CharacterController>();
+                                controller.enabled = false;
+                                this.gameObject.transform.position = TopEscalera.position;
+                                controller.enabled = true;
+                                this.transform.eulerAngles = Vector3.zero;
                                 onEscalera = true;
 							}
 							else if (distanceButton < distanceMid && distanceButton < distanceTop)
 							{
 								Debug.Log("Button escalera cerca de player");
 								//Button escalera cerca de player
+								CharacterController controller = this.GetComponent<CharacterController>();
+								controller.enabled = false;
 								this.gameObject.transform.position = ButtonEscalera.position;
-								this.transform.eulerAngles = Vector3.zero;
+                                controller.enabled = true;
+                                this.transform.eulerAngles = Vector3.zero;
                                 onEscalera = true;
 							}
 							else
 							{
 								Debug.Log("Mid escalera cerca de player");
-								//Mid escalera cerca de player
-								this.gameObject.transform.position = MidEscalera.position;
-								this.transform.eulerAngles = Vector3.zero;
+                                //Mid escalera cerca de player
+                                CharacterController controller = this.GetComponent<CharacterController>();
+                                controller.enabled = false;
+                                this.gameObject.transform.position = MidEscalera.position;
+                                controller.enabled = true;
+                                this.transform.eulerAngles = Vector3.zero;
                                 onEscalera = true;
 							}
 
@@ -345,21 +354,30 @@ namespace StarterAssets
             {
                 Debug.Log("Top");
                 //Top escalera cerca de player
+                CharacterController controller = this.GetComponent<CharacterController>();
+                controller.enabled = false;
                 this.gameObject.transform.position = TopEscalera.position;
+                controller.enabled = true;
                 onEscalera = false;
             }
             else if (distanceButton < distanceMid && distanceButton < distanceTop)
             {
                 Debug.Log("Button");
                 //Button escalera cerca de player
+                CharacterController controller = this.GetComponent<CharacterController>();
+                controller.enabled = false;
                 this.gameObject.transform.position = ButtonEscalera.position;
+                controller.enabled = true;
                 onEscalera = false;
             }
             else
             {
                 Debug.Log("Mid");
                 //Mid escalera cerca de player
+                CharacterController controller = this.GetComponent<CharacterController>();
+                controller.enabled = false;
                 this.gameObject.transform.position = MidEscalera.position;
+                controller.enabled = true;
                 onEscalera = false;
             }
 
