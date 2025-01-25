@@ -4,22 +4,16 @@ using TMPro;
 public class GameManager : MonoBehaviour
 {
     public int BombonasARecoger;
+    public int BombonasPickedUp;
     public TextMeshProUGUI textoBombonasMax;
 
     private void OnEnable()
     {
-        //textoBombonasMax.SetText("");
+        UpgradeBombonasNumber();
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public void UpgradeBombonasNumber()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        textoBombonasMax.SetText(BombonasPickedUp + "/" + BombonasARecoger);
     }
 }
