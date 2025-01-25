@@ -8,6 +8,7 @@ TagManager:
   - Interactuable
   - Escalera
   - agua
+  - Respirador
   layers:
   - Default
   - TransparentFX

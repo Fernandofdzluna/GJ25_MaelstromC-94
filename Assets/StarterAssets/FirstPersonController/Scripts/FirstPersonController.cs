@@ -311,6 +311,15 @@ namespace StarterAssets
                             colliderPlayer.excludeLayers = LayerMask.GetMask("SuelosEscaleras");
 						}
 						break;
+					case "Respirador":
+						Debug.Log("Dentro");
+						if (!hasMascaraRespiracion)
+						{
+							mascaraRespiracion.SetActive(true);
+							hasMascaraRespiracion = true;
+							Destroy(hit.collider.gameObject);
+						}
+						break;
 				}
 			}
 		}
