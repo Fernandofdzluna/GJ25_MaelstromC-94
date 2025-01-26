@@ -19402,9 +19402,49 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 135561167482553608, guid: 55c7115410e06464a8282713e8816c7d, type: 3}
+      propertyPath: audioDoorClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 5f95b0a7006d5ff488a239da91f2d930, type: 3}
+    - target: {fileID: 135561167482553608, guid: 55c7115410e06464a8282713e8816c7d, type: 3}
+      propertyPath: audioWalkClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6e58d61d09334f84daae830c9b39b8f2, type: 3}
+    - target: {fileID: 135561167482553608, guid: 55c7115410e06464a8282713e8816c7d, type: 3}
+      propertyPath: audioDeathClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 75e15adeeabbba548ba7c59aa9c38b45, type: 3}
+    - target: {fileID: 135561167482553608, guid: 55c7115410e06464a8282713e8816c7d, type: 3}
       propertyPath: aguantar_script
       value: 
       objectReference: {fileID: 1456353488}
+    - target: {fileID: 135561167482553608, guid: 55c7115410e06464a8282713e8816c7d, type: 3}
+      propertyPath: audioBreathClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 74518a979aff96140ad3679368873aa6, type: 3}
+    - target: {fileID: 135561167482553608, guid: 55c7115410e06464a8282713e8816c7d, type: 3}
+      propertyPath: audioStairsClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 7d444970cdb29c640bc69c06cf655f59, type: 3}
+    - target: {fileID: 135561167482553608, guid: 55c7115410e06464a8282713e8816c7d, type: 3}
+      propertyPath: audioBotellaClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 58e356c959b3ddd41ac15a0878925da9, type: 3}
+    - target: {fileID: 135561167482553608, guid: 55c7115410e06464a8282713e8816c7d, type: 3}
+      propertyPath: audioAhogarseClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 3b39bb541fc8df544902c354dfa64de6, type: 3}
+    - target: {fileID: 135561167482553608, guid: 55c7115410e06464a8282713e8816c7d, type: 3}
+      propertyPath: audioItemEquipClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 7f85c3c6a54ab904aadf74b513ebef8f, type: 3}
+    - target: {fileID: 135561167482553608, guid: 55c7115410e06464a8282713e8816c7d, type: 3}
+      propertyPath: audioWaterWalkClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 648506cc9d720204a8591f2d64af4e58, type: 3}
+    - target: {fileID: 135561167482553608, guid: 55c7115410e06464a8282713e8816c7d, type: 3}
+      propertyPath: audioBreathWaterClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 124353ad64bfc6b4fba075096f969f97, type: 3}
     - target: {fileID: 700249971320784573, guid: 55c7115410e06464a8282713e8816c7d, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
