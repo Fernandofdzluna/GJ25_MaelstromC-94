@@ -90,6 +90,7 @@ namespace StarterAssets
 
 		public AudioClip audioWalkClip, audioStairsClip, audioBotellaClip, audioBreathWaterClip, audioDeathClip,
 			audioWaterWalkClip, audioBreathClip, audioItemEquipClip, audioDoorClip, audioAhogarseClip;
+		public bool audioClipPlayed, audioClipPlayed2, audioClipPlayed3 = false;
 
 		private bool IsCurrentDeviceMouse
 		{
@@ -171,7 +172,12 @@ namespace StarterAssets
                         perlinNoise.m_AmplitudeGain = amplitudFrecuencyWalking.x;
                         perlinNoise.m_FrequencyGain = amplitudFrecuencyWalking.y;
 
-						SoundFXManager.instance.PlaySoundFXCLip(audioWalkClip, transform, 1f);
+						//SoundFXManager.instance.PlaySoundFXCLip(audioWalkClip, transform, 1f);
+						if(audioClipPlayed2 == false)
+                        {
+							audioClipPlayed = true;
+							StartCoroutine(Second());
+                        }
 					}
                     else
                     {
@@ -179,15 +185,18 @@ namespace StarterAssets
                         perlinNoise.m_AmplitudeGain = amplitudFrecuencyStopped.x;
                         perlinNoise.m_FrequencyGain = amplitudFrecuencyStopped.y;
 
-						SoundFXManager.instance.PlaySoundFXCLip(audioBreathClip, transform, 1f);
+						//SoundFXManager.instance.PlaySoundFXCLip(audioBreathClip, transform, 1f);
+						if (audioClipPlayed3 == false)
+						{
+							audioClipPlayed = true;
+							StartCoroutine(Third());
+						}
 					}
                 }
                 else
                 {
                     perlinNoise.m_AmplitudeGain = amplitudFrecuencyStopped.x;
                     perlinNoise.m_FrequencyGain = amplitudFrecuencyStopped.y;
-
-					//SoundFXManager.instance.PlaySoundFXCLip(audioStairsClip, transform, 1f);
 				}
             }
 
@@ -195,8 +204,6 @@ namespace StarterAssets
 			{
 				pickedObject.transform.localPosition = Vector3.zero;
 				pickedObject.transform.eulerAngles = Vector3.zero;
-
-				SoundFXManager.instance.PlaySoundFXCLip(audioItemEquipClip, transform, 1f);
 			}
 		}
 
@@ -280,7 +287,7 @@ namespace StarterAssets
 				// move the player
 				_controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 
-				SoundFXManager.instance.PlaySoundFXCLip(audioWalkClip, transform, 1f);
+				//SoundFXManager.instance.PlaySoundFXCLip(audioWalkClip, transform, 1f);
 			}
 			else
 			{
@@ -291,8 +298,6 @@ namespace StarterAssets
 
                 // move the player
                 _controller.Move(inputDirection.normalized * (3 * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
-
-				SoundFXManager.instance.PlaySoundFXCLip(audioStairsClip, transform, 1f);
 			}
 		}
 
@@ -336,7 +341,8 @@ namespace StarterAssets
 							{
                                 //Top escalera cerca de player
                                 CharacterController controller = this.GetComponent<CharacterController>();
-                                controller.enabled = false;
+								SoundFXManager.instance.PlaySoundFXCLip(audioStairsClip, transform, 1f);
+								controller.enabled = false;
                                 this.gameObject.transform.position = TopEscalera.position;
                                 controller.enabled = true;
                                 this.transform.eulerAngles = new Vector3(0, 90, 0);
@@ -346,6 +352,7 @@ namespace StarterAssets
 							{
 								//Button escalera cerca de player
 								CharacterController controller = this.GetComponent<CharacterController>();
+								SoundFXManager.instance.PlaySoundFXCLip(audioStairsClip, transform, 1f);
 								controller.enabled = false;
 								this.gameObject.transform.position = ButtonEscalera.position;
                                 controller.enabled = true;
@@ -356,7 +363,8 @@ namespace StarterAssets
 							{
                                 //Mid escalera cerca de player
                                 CharacterController controller = this.GetComponent<CharacterController>();
-                                controller.enabled = false;
+								SoundFXManager.instance.PlaySoundFXCLip(audioStairsClip, transform, 1f);
+								controller.enabled = false;
                                 this.gameObject.transform.position = MidEscalera.position;
                                 controller.enabled = true;
                                 this.transform.eulerAngles = new Vector3(0,90,0);
@@ -395,7 +403,7 @@ namespace StarterAssets
 							{
 								hit.collider.gameObject.GetComponent<Animator>().SetTrigger("Rotar");
 
-								SoundFXManager.instance.PlaySoundFXCLip(audioDoorClip, transform, 1f);
+								SoundFXManager.instance.PlaySoundFXCLip(audioDoorClip, transform, 0.8f);
 
 								gameManager.EscapeSubmarine();
                             }
@@ -420,7 +428,7 @@ namespace StarterAssets
 						Destroy(pickedObject);
 						gameManager.UpgradeBombonasNumber(1);
 
-						SoundFXManager.instance.PlaySoundFXCLip(audioBotellaClip, transform, 1f);
+						SoundFXManager.instance.PlaySoundFXCLip(audioBotellaClip, transform, 0.5f);
 					}
 					else if(animatorBox.GetBool("SecBombona") == false)
 					{
@@ -429,7 +437,7 @@ namespace StarterAssets
                         Destroy(pickedObject);
                         gameManager.UpgradeBombonasNumber(1);
 
-						SoundFXManager.instance.PlaySoundFXCLip(audioBotellaClip, transform, 1f);
+						SoundFXManager.instance.PlaySoundFXCLip(audioBotellaClip, transform, 0.5f);
 					}
                 }
 				else
@@ -456,30 +464,27 @@ namespace StarterAssets
                 //Top escalera cerca de player
                 CharacterController controller = this.GetComponent<CharacterController>();
                 controller.enabled = false;
-                this.gameObject.transform.position = TopEscalera.position;
+				this.gameObject.transform.position = TopEscalera.position;
                 controller.enabled = true;
                 onEscalera = false;
-				SoundFXManager.instance.PlaySoundFXCLip(audioStairsClip, transform, 1f);
 			}
             else if (distanceButton < distanceMid && distanceButton < distanceTop)
             {
                 //Button escalera cerca de player
                 CharacterController controller = this.GetComponent<CharacterController>();
                 controller.enabled = false;
-                this.gameObject.transform.position = ButtonEscalera.position;
+				this.gameObject.transform.position = ButtonEscalera.position;
                 controller.enabled = true;
                 onEscalera = false;
-				SoundFXManager.instance.PlaySoundFXCLip(audioStairsClip, transform, 1f);
 			}
             else
             {
                 //Mid escalera cerca de player
                 CharacterController controller = this.GetComponent<CharacterController>();
                 controller.enabled = false;
-                this.gameObject.transform.position = MidEscalera.position;
+				this.gameObject.transform.position = MidEscalera.position;
                 controller.enabled = true;
                 onEscalera = false;
-				SoundFXManager.instance.PlaySoundFXCLip(audioStairsClip, transform, 1f);
 			}
 
             colliderPlayer.excludeLayers = LayerMask.GetMask("Nothing");
@@ -492,6 +497,11 @@ namespace StarterAssets
                 barraRojaRespiración.sizeDelta = new Vector2(maxBarraRojaWidth, barraRojaRespiración.sizeDelta.y);
 
 				SoundFXManager.instance.PlaySoundFXCLip(audioBreathWaterClip, transform, 1f);
+				if (audioClipPlayed == false)
+				{
+					audioClipPlayed = true;
+					StartCoroutine(Once());
+				}
 			}
 			else
 			{
@@ -501,7 +511,8 @@ namespace StarterAssets
                     mascaraRespiracion.SetActive(false);
                     hasMascaraRespiracion = false;
 					aguantar_script.ApplyWithout(true);
-                }
+					SoundFXManager.instance.PlaySoundFXCLip(audioAhogarseClip, transform, 1f);
+				}
             }
 		}
 
@@ -524,5 +535,25 @@ namespace StarterAssets
 				gameManager.ChangeSubmarineScreens();
             }
         }
-    }
+
+		public IEnumerator Once()
+        {
+			SoundFXManager.instance.PlaySoundFXCLip(audioWaterWalkClip, transform, 1f);
+			//audioClipPlayed = false;
+			yield return new WaitForSeconds(1.5f);
+			audioClipPlayed = false;
+		}
+		public IEnumerator Second()
+		{
+			SoundFXManager.instance.PlaySoundFXCLip(audioWalkClip, transform, 1f);
+			yield return new WaitForSeconds(1);
+			audioClipPlayed2 = false;
+		}
+		public IEnumerator Third()
+		{
+			SoundFXManager.instance.PlaySoundFXCLip(audioBreathClip, transform, 1f);
+			yield return new WaitForSeconds(2);
+			audioClipPlayed3 = false;
+		}
+	}
 }

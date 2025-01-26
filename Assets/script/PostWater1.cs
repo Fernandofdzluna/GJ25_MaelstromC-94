@@ -86,6 +86,11 @@ public class PostWater1 : MonoBehaviour
                 ojos = false;
                 script_FristPersonController.MoveSpeed = script_FristPersonController.stablishedSpeed;
                 script_FristPersonController.ahogandose = false;
+                if(script_FristPersonController.audioClipPlayed == false)
+                {
+                    script_FristPersonController.audioClipPlayed = true;
+                    script_FristPersonController.Once();
+                }
             }
         }
 

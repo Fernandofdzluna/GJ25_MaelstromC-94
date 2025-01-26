@@ -19340,11 +19340,11 @@ PrefabInstance:
     - target: {fileID: 135561167482553608, guid: 55c7115410e06464a8282713e8816c7d, type: 3}
       propertyPath: audioStairsClip
       value: 
-      objectReference: {fileID: 8300000, guid: 7d444970cdb29c640bc69c06cf655f59, type: 3}
+      objectReference: {fileID: 8300000, guid: f46b74186f568b346ace65136ab1bd59, type: 3}
     - target: {fileID: 135561167482553608, guid: 55c7115410e06464a8282713e8816c7d, type: 3}
       propertyPath: audioBotellaClip
       value: 
-      objectReference: {fileID: 8300000, guid: 58e356c959b3ddd41ac15a0878925da9, type: 3}
+      objectReference: {fileID: 8300000, guid: c1fda0abe460abf4b8ea042c43a4c980, type: 3}
     - target: {fileID: 135561167482553608, guid: 55c7115410e06464a8282713e8816c7d, type: 3}
       propertyPath: audioAhogarseClip
       value: 
