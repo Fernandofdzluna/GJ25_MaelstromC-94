@@ -74,6 +74,7 @@ namespace StarterAssets
 		Collider colliderPlayer;
 		GameObject Escalera;
 		public bool ahogandose = false;
+		public bool bombonasCompletas = false;
 
 #if ENABLE_INPUT_SYSTEM
         private PlayerInput _playerInput;
@@ -128,7 +129,9 @@ namespace StarterAssets
 			zonaBombonasVisitada = false;
 
 			stablishedSpeed = MoveSpeed;
-		}
+			bombonasCompletas = false;
+
+        }
 
 		private void Start()
 		{
@@ -369,8 +372,12 @@ namespace StarterAssets
 					case "Escotilla":
 						if (tecla == "E")
 						{
-							Debug.Log("Dentro");
-						}
+							//if (bombonasCompletas == true)
+							//{
+								hit.collider.gameObject.GetComponent<Animator>().SetTrigger("Rotar");
+								gameManager.EscapeSubmarine();
+                            //}
+                        }
 						break;
 				}
 			}

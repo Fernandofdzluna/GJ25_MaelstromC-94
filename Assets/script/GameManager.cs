@@ -3,6 +3,7 @@ using TMPro;
 using System.Collections;
 using UnityEngine.SceneManagement;
 using StarterAssets;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class GameManager : MonoBehaviour
 
     RectTransform barraAguaTransform;
     float aguaMaxHeight;
+
+    public Image imagenAMostrar;
 
     private void OnEnable()
     {
@@ -64,6 +67,7 @@ public class GameManager : MonoBehaviour
             GameObject padreCanvas = visorTutoBombonas.transform.parent.gameObject;
             padreCanvas.transform.GetChild(2).gameObject.SetActive(true);
             EndGame(true);
+            player.GetComponent<FirstPersonController>().bombonasCompletas = true;
         }
     }
 
@@ -77,6 +81,11 @@ public class GameManager : MonoBehaviour
         {
             submarinoPostSalasVistas[z].SetActive(true);
         }
+    }
+
+    public void EscapeSubmarine()
+    {
+        StartCoroutine(fadeIn());
     }
 
     public void EndGame(bool gameCompleted)
@@ -109,5 +118,19 @@ public class GameManager : MonoBehaviour
         player.GetComponent<FirstPersonController>().enabled = true;
         Destroy(player.transform.GetChild(1).gameObject);
         player.GetComponent<Animator>().enabled = false;
+    }
+
+    IEnumerator fadeIn()
+    {
+        var tempColor = imagenAMostrar.color;
+
+        for (int i = 0; i < 10; i++)
+        {
+            tempColor.a += 0.1f;
+            yield return new WaitForSeconds(0.2f);
+            imagenAMostrar.color = tempColor;
+        }
+        yield return new WaitForSeconds(2);
+        Debug.Log("FullBlack");
     }
 }
