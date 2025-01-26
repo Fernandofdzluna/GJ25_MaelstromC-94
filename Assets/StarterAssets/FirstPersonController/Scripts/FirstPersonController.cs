@@ -123,7 +123,6 @@ namespace StarterAssets
 			unidadBarraRoja = maxBarraRojaWidth / tiempoBucalRespirador;
 
 			animatorPlayer = this.gameObject.GetComponent<Animator>();
-			animatorPlayer.enabled = false;
 
 			gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 			zonaBombonasVisitada = false;
@@ -190,9 +189,9 @@ namespace StarterAssets
 		private void LateUpdate()
 		{
 			CameraRotation();
-		}
+        }
 
-		private void CameraRotation()
+        private void CameraRotation()
 		{
             if (!onEscalera)
             {

@@ -2,9 +2,12 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 using UnityEngine.SceneManagement;
+using StarterAssets;
 
 public class GameManager : MonoBehaviour
 {
+    GameObject player;
+    Transform spawnPoint;
     public GameObject aguaAscendente;
     agua_subiendo_2 scriptAguaAscendente;
     float unidadSubidaAgua;
@@ -20,6 +23,8 @@ public class GameManager : MonoBehaviour
 
     private void OnEnable()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
+        spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint").transform;
         UpgradeBombonasNumber(0);
         submarinoPreVisitaScreens = GameObject.FindGameObjectsWithTag("PreSalasBombonasVisitar");
         submarinoPostSalasVistas = GameObject.FindGameObjectsWithTag("SalaBombonasVisitada");
@@ -32,6 +37,11 @@ public class GameManager : MonoBehaviour
         }
         scriptAguaAscendente = aguaAscendente.GetComponent<agua_subiendo_2>();
         unidadSubidaAgua = aguaMaxHeight / scriptAguaAscendente.timeToMaxHeight;
+
+        player.transform.position = spawnPoint.position;
+        player.GetComponent<StarterAssetsInputs>().enabled = false;
+        player.GetComponent<FirstPersonController>().enabled = false;
+        StartCoroutine(wakeUpAnimationFinished());
     }
 
     void Update()
@@ -90,5 +100,14 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(5);
         Debug.Log("Fin");
         //SceneManager.LoadScene("");
+    }
+
+    IEnumerator wakeUpAnimationFinished()
+    {
+        yield return new WaitForSeconds(13);
+        player.GetComponent<StarterAssetsInputs>().enabled = true;
+        player.GetComponent<FirstPersonController>().enabled = true;
+        Destroy(player.transform.GetChild(1).gameObject);
+        player.GetComponent<Animator>().enabled = false;
     }
 }

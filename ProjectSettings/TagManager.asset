@@ -12,6 +12,7 @@ TagManager:
   - PreSalasBombonasVisitar
   - SalaBombonasVisitada
   - MaquinaBombonas
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX
