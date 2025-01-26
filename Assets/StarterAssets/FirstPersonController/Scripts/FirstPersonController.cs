@@ -88,6 +88,9 @@ namespace StarterAssets
 
 		private const float _threshold = 0.01f;
 
+		public AudioClip audioWalkClip, audioStairsClip, audioBotellaClip, audioBreathWaterClip, audioDeathClip,
+			audioWaterWalkClip, audioBreathClip, audioItemEquipClip, audioDoorClip, audioAhogarseClip;
+
 		private bool IsCurrentDeviceMouse
 		{
 			get
@@ -167,25 +170,33 @@ namespace StarterAssets
                         //Caminar
                         perlinNoise.m_AmplitudeGain = amplitudFrecuencyWalking.x;
                         perlinNoise.m_FrequencyGain = amplitudFrecuencyWalking.y;
-                    }
+
+						SoundFXManager.instance.PlaySoundFXCLip(audioWalkClip, transform, 1f);
+					}
                     else
                     {
                         //Quieto
                         perlinNoise.m_AmplitudeGain = amplitudFrecuencyStopped.x;
                         perlinNoise.m_FrequencyGain = amplitudFrecuencyStopped.y;
-                    }
+
+						SoundFXManager.instance.PlaySoundFXCLip(audioBreathClip, transform, 1f);
+					}
                 }
                 else
                 {
                     perlinNoise.m_AmplitudeGain = amplitudFrecuencyStopped.x;
                     perlinNoise.m_FrequencyGain = amplitudFrecuencyStopped.y;
-                }
+
+					//SoundFXManager.instance.PlaySoundFXCLip(audioStairsClip, transform, 1f);
+				}
             }
 
             if (objectPicked)
 			{
 				pickedObject.transform.localPosition = Vector3.zero;
 				pickedObject.transform.eulerAngles = Vector3.zero;
+
+				SoundFXManager.instance.PlaySoundFXCLip(audioItemEquipClip, transform, 1f);
 			}
 		}
 
@@ -262,10 +273,14 @@ namespace StarterAssets
 				{
 					// move
 					inputDirection = transform.right * _input.move.x + transform.forward * _input.move.y;
+
+					//SoundFXManager.instance.PlaySoundFXCLip(audioWalkClip, transform, 1f);
 				}
 
 				// move the player
 				_controller.Move(inputDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
+
+				SoundFXManager.instance.PlaySoundFXCLip(audioWalkClip, transform, 1f);
 			}
 			else
 			{
@@ -276,7 +291,9 @@ namespace StarterAssets
 
                 // move the player
                 _controller.Move(inputDirection.normalized * (3 * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
-            }
+
+				SoundFXManager.instance.PlaySoundFXCLip(audioStairsClip, transform, 1f);
+			}
 		}
 
 		private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
@@ -355,7 +372,8 @@ namespace StarterAssets
 							mascaraRespiracion.SetActive(true);
 							hasMascaraRespiracion = true;
 							tiempoBucalRespirador = 30;
-                            Breath(true);
+							SoundFXManager.instance.PlaySoundFXCLip(audioBreathWaterClip, transform, 1f);
+							Breath(true);
                             Destroy(hit.collider.gameObject);
 						}
 						else
@@ -364,6 +382,7 @@ namespace StarterAssets
 							{
 								tiempoBucalRespirador = 30;
 								Breath(true);
+								SoundFXManager.instance.PlaySoundFXCLip(audioAhogarseClip, transform, 1f);
 								Destroy(hit.collider.gameObject);
 								Breath(true);
 							}
@@ -375,6 +394,9 @@ namespace StarterAssets
 							if (bombonasCompletas == true)
 							{
 								hit.collider.gameObject.GetComponent<Animator>().SetTrigger("Rotar");
+
+								SoundFXManager.instance.PlaySoundFXCLip(audioDoorClip, transform, 1f);
+
 								gameManager.EscapeSubmarine();
                             }
                         }
@@ -398,21 +420,26 @@ namespace StarterAssets
 						Destroy(pickedObject);
 						gameManager.UpgradeBombonasNumber(1);
 
-                    }
+						SoundFXManager.instance.PlaySoundFXCLip(audioBotellaClip, transform, 1f);
+					}
 					else if(animatorBox.GetBool("SecBombona") == false)
 					{
                         animatorBox.SetBool("SecBombona", true);
                         objectPicked = false;
                         Destroy(pickedObject);
                         gameManager.UpgradeBombonasNumber(1);
-                    }
+
+						SoundFXManager.instance.PlaySoundFXCLip(audioBotellaClip, transform, 1f);
+					}
                 }
 				else
                 {
                     objectPicked = false;
                     hands.transform.DetachChildren();
                     pickedObject.transform.position = this.gameObject.transform.position;
-                }
+
+					SoundFXManager.instance.PlaySoundFXCLip(audioItemEquipClip, transform, 1f);
+				}
             }
         }
 
@@ -432,7 +459,8 @@ namespace StarterAssets
                 this.gameObject.transform.position = TopEscalera.position;
                 controller.enabled = true;
                 onEscalera = false;
-            }
+				SoundFXManager.instance.PlaySoundFXCLip(audioStairsClip, transform, 1f);
+			}
             else if (distanceButton < distanceMid && distanceButton < distanceTop)
             {
                 //Button escalera cerca de player
@@ -441,7 +469,8 @@ namespace StarterAssets
                 this.gameObject.transform.position = ButtonEscalera.position;
                 controller.enabled = true;
                 onEscalera = false;
-            }
+				SoundFXManager.instance.PlaySoundFXCLip(audioStairsClip, transform, 1f);
+			}
             else
             {
                 //Mid escalera cerca de player
@@ -450,7 +479,8 @@ namespace StarterAssets
                 this.gameObject.transform.position = MidEscalera.position;
                 controller.enabled = true;
                 onEscalera = false;
-            }
+				SoundFXManager.instance.PlaySoundFXCLip(audioStairsClip, transform, 1f);
+			}
 
             colliderPlayer.excludeLayers = LayerMask.GetMask("Nothing");
         }
@@ -460,7 +490,9 @@ namespace StarterAssets
 			if (add)
 			{
                 barraRojaRespiración.sizeDelta = new Vector2(maxBarraRojaWidth, barraRojaRespiración.sizeDelta.y);
-            }
+
+				SoundFXManager.instance.PlaySoundFXCLip(audioBreathWaterClip, transform, 1f);
+			}
 			else
 			{
                 barraRojaRespiración.sizeDelta -= new Vector2(unidadBarraRoja, 0);
@@ -479,6 +511,7 @@ namespace StarterAssets
 			starterAssetsInputs.enabled = false;
 			animatorPlayer.enabled = true;
 			animatorPlayer.SetTrigger("Death");
+			SoundFXManager.instance.PlaySoundFXCLip(audioDeathClip, transform, 1f);
 			gameManager.EndGame(false);
 			this.enabled = false;
 		}
