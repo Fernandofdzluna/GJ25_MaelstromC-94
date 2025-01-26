@@ -175,7 +175,7 @@ namespace StarterAssets
 						//SoundFXManager.instance.PlaySoundFXCLip(audioWalkClip, transform, 1f);
 						if(audioClipPlayed2 == false)
                         {
-							audioClipPlayed = true;
+							audioClipPlayed2 = true;
 							StartCoroutine(Second());
                         }
 					}
@@ -188,7 +188,7 @@ namespace StarterAssets
 						//SoundFXManager.instance.PlaySoundFXCLip(audioBreathClip, transform, 1f);
 						if (audioClipPlayed3 == false)
 						{
-							audioClipPlayed = true;
+							audioClipPlayed3 = true;
 							StartCoroutine(Third());
 						}
 					}
