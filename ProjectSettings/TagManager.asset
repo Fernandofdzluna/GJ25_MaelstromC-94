@@ -9,6 +9,8 @@ TagManager:
   - Escalera
   - agua
   - Respirador
+  - PreSalasBombonasVisitar
+  - SalaBombonasVisitada
   layers:
   - Default
   - TransparentFX

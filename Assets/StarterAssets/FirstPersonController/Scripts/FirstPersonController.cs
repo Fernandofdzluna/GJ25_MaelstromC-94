@@ -68,6 +68,8 @@ namespace StarterAssets
 		bool objectPicked;
 		public bool onEscalera;
 
+		bool zonaBombonasVisitada = false;
+
 		Collider colliderPlayer;
 		GameObject Escalera;
 		public bool ahogandose = false;
@@ -123,6 +125,7 @@ namespace StarterAssets
 			animatorPlayer.enabled = false;
 
 			gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+			zonaBombonasVisitada = false;
 		}
 
 		private void Start()
@@ -447,5 +450,15 @@ namespace StarterAssets
 			gameManager.EndGame();
 			this.enabled = false;
 		}
-	}
+
+        private void OnTriggerEnter(Collider other)
+        {
+			if (other.gameObject.transform.name == "SalaBombonas" && zonaBombonasVisitada == false)
+			{
+				Debug.Log("ZonaVisitada");
+				zonaBombonasVisitada = true;
+				gameManager.ChangeSubmarineScreens();
+            }
+        }
+    }
 }
