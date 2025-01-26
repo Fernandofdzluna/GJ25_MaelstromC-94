@@ -4855,6 +4855,7 @@ GameObject:
   - component: {fileID: 4591406077924042594}
   - component: {fileID: 3815101037961838708}
   - component: {fileID: 7401417761289279550}
+  - component: {fileID: 7855169281751571542}
   m_Layer: 0
   m_Name: ObjetoInteractuable
   m_TagString: Interactuable
@@ -4981,3 +4982,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!114 &7855169281751571542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2645600830921950903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30b0de2cd8a1fc744b4ca9bb6299cc7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

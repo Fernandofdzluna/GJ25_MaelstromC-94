@@ -49,7 +49,10 @@ public class GameManager : MonoBehaviour
         textoBombonasMax.SetText(BombonasPickedUp + "/" + BombonasARecoger);
         if (BombonasPickedUp >= 18)
         {
-            Debug.Log("Juego Completado");
+            GameObject visorTutoBombonas = GameObject.Find("RegistroBombonas");
+            visorTutoBombonas.SetActive(false);
+            GameObject padreCanvas = visorTutoBombonas.transform.parent.gameObject;
+            padreCanvas.transform.GetChild(2).gameObject.SetActive(true);
         }
     }
 
