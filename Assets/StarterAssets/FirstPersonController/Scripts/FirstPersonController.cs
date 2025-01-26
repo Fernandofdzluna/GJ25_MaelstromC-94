@@ -366,6 +366,12 @@ namespace StarterAssets
 							}
 						}
 						break;
+					case "Escotilla":
+						if (tecla == "E")
+						{
+							Debug.Log("Dentro");
+						}
+						break;
 				}
 			}
 		}
