@@ -372,11 +372,11 @@ namespace StarterAssets
 					case "Escotilla":
 						if (tecla == "E")
 						{
-							//if (bombonasCompletas == true)
-							//{
+							if (bombonasCompletas == true)
+							{
 								hit.collider.gameObject.GetComponent<Animator>().SetTrigger("Rotar");
 								gameManager.EscapeSubmarine();
-                            //}
+                            }
                         }
 						break;
 				}

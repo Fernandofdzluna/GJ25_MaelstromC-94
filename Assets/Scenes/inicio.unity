@@ -3681,7 +3681,7 @@ MonoBehaviour:
   sliderValueV: 0
   panelBrillo: {fileID: 1882674139}
   imagenMute: {fileID: 1727449246}
-  sceneName: submarino
+  sceneName: GameScene
   pantallaCOmpleta: {fileID: 1121639816}
   dropdown: {fileID: 946422718}
 --- !u!4 &1401236560
