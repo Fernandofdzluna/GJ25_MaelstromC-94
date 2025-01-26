@@ -288,7 +288,9 @@ namespace StarterAssets
 			RaycastHit hit;
 
 			Debug.DrawRay(_mainCamera.transform.position, _mainCamera.transform.TransformDirection(Vector3.forward) * 4, Color.red);
-			if (Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.TransformDirection(Vector3.forward), out hit, 4, ~LayerMask.NameToLayer("SuelosEscaleras")))
+			int mask = 1 << LayerMask.NameToLayer("SuelosEscaleras");
+
+            if (Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.TransformDirection(Vector3.forward), out hit, 4, ~mask))
 			{
 				switch (hit.collider.tag)
 				{
