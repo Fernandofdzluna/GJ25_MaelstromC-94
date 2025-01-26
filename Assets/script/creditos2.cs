@@ -19,11 +19,16 @@ public class creditos2 : MonoBehaviour
     public string nextSceneName; // Nombre de la escena a la que cambiar
     private int totalPoints = 0;
     private float remainingTime;
+    public AudioSource audioSource;
+    public ParticleSystem particleEffect;
+    public Canvas canvas; // Asigna el Canvas en el Inspector
 
     private Dictionary<GameObject, Vector3> initialPositions = new Dictionary<GameObject, Vector3>();
 
     void Start()
     {
+        // Obtener el componente AudioSource del GameObject
+        audioSource = GetComponent<AudioSource>();
         remainingTime = gameDuration;
         foreach (var container in creditContainers)
         {
@@ -62,6 +67,25 @@ public class creditos2 : MonoBehaviour
             }
         }
     }
+    public void SpawnParticleEffect()
+    {
+        // Obtener la posición del clic en pantalla
+        Vector2 mousePosition = Input.mousePosition;
+
+        // Convertir la posición de pantalla a coordenadas del mundo
+        RectTransformUtility.ScreenPointToWorldPointInRectangle(
+            canvas.transform as RectTransform,
+            mousePosition,
+            canvas.worldCamera,
+            out Vector3 worldPosition
+        );
+
+        // Mover el sistema de partículas a la posición calculada
+        particleEffect.transform.position = worldPosition;
+
+        // Reproducir el sistema de partículas
+        particleEffect.Play();
+    }
 
     void OnButtonClicked(GameObject container, Button button)
     {
@@ -69,6 +93,8 @@ public class creditos2 : MonoBehaviour
         if (text != null)
         {
             button.gameObject.SetActive(false);
+            audioSource.Play();
+            SpawnParticleEffect();
             StartCoroutine(ShowButtonAfterDelay(button));
         }
         AddPoints(100);
