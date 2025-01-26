@@ -22,6 +22,8 @@ public class botones : MonoBehaviour
     public TMP_Dropdown dropdown;
     public Resolution[] resoluciones;
 
+    public AudioClip boton;
+
     // Método para cambiar de escena
 
     public void Start()
@@ -72,6 +74,7 @@ public class botones : MonoBehaviour
     {
         if (!string.IsNullOrEmpty(sceneName))
         {
+            SoundFXManager.instance.PlaySoundFXCLip(boton, transform, 1f);
             SceneManager.LoadScene(sceneName);
         }
         else
@@ -86,6 +89,7 @@ public class botones : MonoBehaviour
         if (optionsMenu != null && alternateMenu != null)
         {
             bool isOptionsActive = optionsMenu.activeSelf;
+            SoundFXManager.instance.PlaySoundFXCLip(boton, transform, 1f);
             optionsMenu.SetActive(!isOptionsActive);
             alternateMenu.SetActive(isOptionsActive); // Ocurre en viceversa
         }
@@ -99,6 +103,7 @@ public class botones : MonoBehaviour
     public void ExitApplication()
     {
         Debug.Log("Saliendo de la aplicación...");
+        SoundFXManager.instance.PlaySoundFXCLip(boton, transform, 1f);
         Application.Quit();
     }
 
