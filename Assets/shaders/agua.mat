@@ -46,33 +46,33 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _CausticTilling: 1.25
+    - _CausticTilling: 1
     - _FoamDepth: 1
     - _FoamFalloff: 2.7
     - _FoamTilling: 0.99
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _alpha: 0.7
-    - _causticSpeed: 0.05
-    - _cauticOrilla: 0.07
+    - _alpha: 0.9
+    - _causticSpeed: 0.03
+    - _cauticOrilla: 0.6
     - _depth: 1
     - _depthFallout: 2
     - _foamAmount: 0.8
     - _foamOrilla: 0.19
     - _foamShoreWidth: 0.7
-    - _voroiAgitation: 1
-    - _voroiPower: 8.02
+    - _voroiAgitation: 0.5
+    - _voroiPower: 10
     - _voroiScale: 1
     - _voroiSpeed: -0.5
-    - _waveIntensity: 0.06
+    - _waveIntensity: 0.01
     - _waveSpeed: 5
     m_Colors:
-    - _FoamCOlor: {r: 1, g: 1, b: 1, a: 0}
+    - _FoamCOlor: {r: 1, g: 1, b: 1, a: 1}
     - _ShortColor: {r: 0.078933276, g: 0.4498039, b: 0.5333333, a: 0}
-    - _causticColor: {r: 2.297397, g: 2.297397, b: 2.297397, a: 0}
+    - _causticColor: {r: 0.8027794, g: 0.8027794, b: 0.8027794, a: 0}
     - _mainCOlor: {r: 0, g: 0.427015, b: 0.7056604, a: 0}
     - _velocityfoam: {r: 0, g: 0.1, b: 0, a: 0}
-    - _voroi: {r: 1, g: 1, b: 1, a: 0.5647059}
+    - _voroi: {r: 1, g: 1, b: 1, a: 0}
     - _voroiTilling: {r: 3, g: 1, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
