@@ -84,7 +84,7 @@ public class PostWater1 : MonoBehaviour
             {
                 waterGlobalVolume.SetActive(false);
                 ojos = false;
-                script_FristPersonController.MoveSpeed = 4;
+                script_FristPersonController.MoveSpeed = script_FristPersonController.stablishedMoveSpeed;
                 script_FristPersonController.ahogandose = false;
             }
         }
@@ -99,7 +99,7 @@ public class PostWater1 : MonoBehaviour
                 if (!cintura)
                 {
                     cintura = true;
-                    script_FristPersonController.MoveSpeed = 2.5f;
+                    script_FristPersonController.MoveSpeed = 1.5f;
                 }
             }
             else
@@ -107,7 +107,7 @@ public class PostWater1 : MonoBehaviour
                 if (cintura)
                 {
                     cintura = false;
-                    script_FristPersonController.MoveSpeed = 4;
+                    script_FristPersonController.MoveSpeed = script_FristPersonController.stablishedMoveSpeed;
                 }
             }
         }
