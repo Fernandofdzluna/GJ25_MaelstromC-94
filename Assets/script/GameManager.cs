@@ -26,6 +26,11 @@ public class GameManager : MonoBehaviour
 
     bool aguaSubiendo;
 
+    private void Awake()
+    {
+        Cursor.lockState = CursorLockMode.None;    
+    }
+
     private void OnEnable()
     {
         aguaSubiendo = true;
