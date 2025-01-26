@@ -118,7 +118,6 @@ public class GameManager : MonoBehaviour
     IEnumerator finishGame()
     {
         yield return new WaitForSeconds(5);
-        Debug.Log("Fin");
         SceneManager.LoadScene("creditos");
     }
 
@@ -141,7 +140,7 @@ public class GameManager : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
             imagenAMostrar.color = tempColor;
         }
-        yield return new WaitForSeconds(2);
-        Debug.Log("FullBlack");
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene("Final");
     }
 }
