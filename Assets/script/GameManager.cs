@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
 
     private void OnEnable()
     {
-        UpgradeBombonasNumber();
+        UpgradeBombonasNumber(0);
         submarinoPreVisitaScreens = GameObject.FindGameObjectsWithTag("PreSalasBombonasVisitar");
         submarinoPostSalasVistas = GameObject.FindGameObjectsWithTag("SalaBombonasVisitada");
         for (int z = 0; z < submarinoPostSalasVistas.Length; z++)
@@ -43,9 +43,14 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void UpgradeBombonasNumber()
+    public void UpgradeBombonasNumber(int add)
     {
+        BombonasPickedUp += add;
         textoBombonasMax.SetText(BombonasPickedUp + "/" + BombonasARecoger);
+        if (BombonasPickedUp >= 18)
+        {
+            Debug.Log("Juego Completado");
+        }
     }
 
     public void ChangeSubmarineScreens()

@@ -284,12 +284,10 @@ namespace StarterAssets
 		public void CheckRayCast(string tecla)
 		{
 			RaycastHit hit;
-			float distanceToObstacle = 0;
 
 			Debug.DrawRay(_mainCamera.transform.position, _mainCamera.transform.TransformDirection(Vector3.forward) * 4, Color.red);
 			if (Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.TransformDirection(Vector3.forward), out hit, 4))
 			{
-				distanceToObstacle = hit.distance;
 				switch (hit.collider.tag)
 				{
 					case "Interactuable":
@@ -375,9 +373,32 @@ namespace StarterAssets
 		{
             if (objectPicked)
             {
-				objectPicked = false;
-                hands.transform.DetachChildren();
-				pickedObject.transform.position = this.gameObject.transform.position;
+                RaycastHit hit;
+                if (Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.TransformDirection(Vector3.forward), out hit, 4) && hit.collider.tag == "MaquinaBombonas")
+                {
+					Animator animatorBox = hit.collider.GetComponent<Animator>();
+					if (animatorBox.GetBool("FirstBombona") == false)
+					{
+						animatorBox.SetBool("FirstBombona", true);
+						objectPicked = false;
+						Destroy(pickedObject);
+						gameManager.UpgradeBombonasNumber(1);
+
+                    }
+					else if(animatorBox.GetBool("SecBombona") == false)
+					{
+                        animatorBox.SetBool("SecBombona", true);
+                        objectPicked = false;
+                        Destroy(pickedObject);
+                        gameManager.UpgradeBombonasNumber(1);
+                    }
+                }
+				else
+                {
+                    objectPicked = false;
+                    hands.transform.DetachChildren();
+                    pickedObject.transform.position = this.gameObject.transform.position;
+                }
             }
         }
 
