@@ -24,8 +24,11 @@ public class GameManager : MonoBehaviour
 
     public Image imagenAMostrar;
 
+    bool aguaSubiendo;
+
     private void OnEnable()
     {
+        aguaSubiendo = true;
         player = GameObject.FindGameObjectWithTag("Player");
         spawnPoint = GameObject.FindGameObjectWithTag("SpawnPoint").transform;
         UpgradeBombonasNumber(0);
@@ -49,10 +52,18 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        for (int z = 0; z < submarinoPostSalasVistas.Length; z++)
+        if (aguaSubiendo)
         {
-            barraAguaTransform = submarinoPostSalasVistas[z].transform.Find("BarraAgua").GetComponent<RectTransform>();
-            barraAguaTransform.sizeDelta = new Vector2(barraAguaTransform.sizeDelta.x, barraAguaTransform.sizeDelta.y + (unidadSubidaAgua * Time.deltaTime));
+            for (int z = 0; z < submarinoPostSalasVistas.Length; z++)
+            {
+                barraAguaTransform = submarinoPostSalasVistas[z].transform.Find("BarraAgua").GetComponent<RectTransform>();
+                barraAguaTransform.sizeDelta = new Vector2(barraAguaTransform.sizeDelta.x, barraAguaTransform.sizeDelta.y + (unidadSubidaAgua * Time.deltaTime));
+                if (barraAguaTransform.sizeDelta.y >= 73)
+                {
+                    aguaSubiendo = false;
+                    break;
+                }
+            }
         }
     }
 
@@ -108,7 +119,7 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(5);
         Debug.Log("Fin");
-        //SceneManager.LoadScene("");
+        SceneManager.LoadScene("creditos");
     }
 
     IEnumerator wakeUpAnimationFinished()

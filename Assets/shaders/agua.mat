@@ -52,7 +52,7 @@ Material:
     - _FoamTilling: 0.99
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _alpha: 0.9
+    - _alpha: 0.7
     - _causticSpeed: 0.03
     - _cauticOrilla: 0.6
     - _depth: 1
