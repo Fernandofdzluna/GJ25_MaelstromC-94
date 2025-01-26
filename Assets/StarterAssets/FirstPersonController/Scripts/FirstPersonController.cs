@@ -1,4 +1,5 @@
 ﻿using Cinemachine;
+using System.Collections;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
@@ -78,6 +79,8 @@ namespace StarterAssets
 		private StarterAssetsInputs _input;
 		private GameObject _mainCamera;
 		public Aguantar aguantar_script;
+		private Animator animatorPlayer;
+		private GameManager gameManager;
 
 		private const float _threshold = 0.01f;
 
@@ -115,6 +118,11 @@ namespace StarterAssets
 			barraRojaRespiración = BarraRoja.GetComponent<RectTransform>();
 			maxBarraRojaWidth = barraRojaRespiración.sizeDelta.x;
 			unidadBarraRoja = maxBarraRojaWidth / tiempoBucalRespirador;
+
+			animatorPlayer = this.gameObject.GetComponent<Animator>();
+			animatorPlayer.enabled = false;
+
+			gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 		}
 
 		private void Start()
@@ -432,7 +440,12 @@ namespace StarterAssets
 
 		public void DeathPlayer()
 		{
-			Debug.Log("Jugador Muerto");
+			StarterAssetsInputs starterAssetsInputs = this.gameObject.GetComponent<StarterAssetsInputs>();
+			starterAssetsInputs.enabled = false;
+			animatorPlayer.enabled = true;
+			animatorPlayer.SetTrigger("Death");
+			gameManager.EndGame();
+			this.enabled = false;
 		}
 	}
 }

@@ -82,13 +82,6 @@ public class PostWater1 : MonoBehaviour
             }
             else
             {
-                //if (waterGlobalVolume.activeSelf)
-                //{
-                //    waterGlobalVolume.SetActive(false);
-                //    ojos = false;
-                //    script_FristPersonController.MoveSpeed = 4;
-                //    script_FristPersonController.ahogandose = false;
-                //}
                 waterGlobalVolume.SetActive(false);
                 ojos = false;
                 script_FristPersonController.MoveSpeed = 4;
