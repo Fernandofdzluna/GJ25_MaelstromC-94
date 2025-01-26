@@ -16,7 +16,6 @@ namespace StarterAssets
 		[Header("Player")]
 		[Tooltip("Move speed of the character in m/s")]
 		public float MoveSpeed = 4.0f;
-		public float stablishedMoveSpeed;
 		[Tooltip("Sprint speed of the character in m/s")]
 		public float SprintSpeed = 6.0f;
 		[Tooltip("Rotation speed of the character")]
@@ -127,8 +126,6 @@ namespace StarterAssets
 
 			gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 			zonaBombonasVisitada = false;
-
-			stablishedMoveSpeed = MoveSpeed;
 		}
 
 		private void Start()
