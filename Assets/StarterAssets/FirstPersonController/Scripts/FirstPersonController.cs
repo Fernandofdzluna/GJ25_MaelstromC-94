@@ -288,7 +288,7 @@ namespace StarterAssets
 			RaycastHit hit;
 
 			Debug.DrawRay(_mainCamera.transform.position, _mainCamera.transform.TransformDirection(Vector3.forward) * 4, Color.red);
-			if (Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.TransformDirection(Vector3.forward), out hit, 4))
+			if (Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.TransformDirection(Vector3.forward), out hit, 4, ~LayerMask.NameToLayer("SuelosEscaleras")))
 			{
 				switch (hit.collider.tag)
 				{
@@ -312,7 +312,6 @@ namespace StarterAssets
 							float distanceTop = Vector3.Distance(this.transform.position, TopEscalera.transform.position);
 							if (distanceTop < distanceMid && distanceTop < distanceButton)
 							{
-								Debug.Log("Top escalera cerca de player");
                                 //Top escalera cerca de player
                                 CharacterController controller = this.GetComponent<CharacterController>();
                                 controller.enabled = false;
@@ -323,7 +322,6 @@ namespace StarterAssets
 							}
 							else if (distanceButton < distanceMid && distanceButton < distanceTop)
 							{
-								Debug.Log("Button escalera cerca de player");
 								//Button escalera cerca de player
 								CharacterController controller = this.GetComponent<CharacterController>();
 								controller.enabled = false;
@@ -334,7 +332,6 @@ namespace StarterAssets
 							}
 							else
 							{
-								Debug.Log("Mid escalera cerca de player");
                                 //Mid escalera cerca de player
                                 CharacterController controller = this.GetComponent<CharacterController>();
                                 controller.enabled = false;
@@ -414,7 +411,6 @@ namespace StarterAssets
             float distanceTop = Vector3.Distance(this.transform.position, TopEscalera.transform.position);
             if (distanceTop < distanceMid && distanceTop < distanceButton)
             {
-                Debug.Log("Top");
                 //Top escalera cerca de player
                 CharacterController controller = this.GetComponent<CharacterController>();
                 controller.enabled = false;
@@ -424,7 +420,6 @@ namespace StarterAssets
             }
             else if (distanceButton < distanceMid && distanceButton < distanceTop)
             {
-                Debug.Log("Button");
                 //Button escalera cerca de player
                 CharacterController controller = this.GetComponent<CharacterController>();
                 controller.enabled = false;
@@ -434,7 +429,6 @@ namespace StarterAssets
             }
             else
             {
-                Debug.Log("Mid");
                 //Mid escalera cerca de player
                 CharacterController controller = this.GetComponent<CharacterController>();
                 controller.enabled = false;
@@ -478,7 +472,6 @@ namespace StarterAssets
         {
 			if (other.gameObject.transform.name == "SalaBombonas" && zonaBombonasVisitada == false)
 			{
-				Debug.Log("ZonaVisitada");
 				zonaBombonasVisitada = true;
 				gameManager.ChangeSubmarineScreens();
             }

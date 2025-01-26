@@ -104,7 +104,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator wakeUpAnimationFinished()
     {
-        yield return new WaitForSeconds(13);
+        yield return new WaitForSeconds(11.5f);
         player.GetComponent<StarterAssetsInputs>().enabled = true;
         player.GetComponent<FirstPersonController>().enabled = true;
         Destroy(player.transform.GetChild(1).gameObject);

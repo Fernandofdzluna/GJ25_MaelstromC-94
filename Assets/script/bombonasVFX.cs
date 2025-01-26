@@ -20,7 +20,7 @@ public class bombonasVFX : MonoBehaviour
     {
         if (bajoAgua == false)
         {
-            if (bombonaVFX.transform.position.y < aguaScene.transform.position.y)
+            if (bombonaVFX.transform.position.y + 0.2f < aguaScene.transform.position.y)
             {
                 Debug.Log("Bombona por debajo de agua");
                 changeVFXState(true);
@@ -29,7 +29,7 @@ public class bombonasVFX : MonoBehaviour
         }
         else
         {
-            if (bombonaVFX.transform.position.y >= aguaScene.transform.position.y)
+            if (bombonaVFX.transform.position.y + 0.2f >= aguaScene.transform.position.y)
             {
                 Debug.Log("Bombona por encima de agua");
                 changeVFXState(false);
