@@ -106,6 +106,8 @@ public class creditos2 : MonoBehaviour
         if (button != null)
         {
             button.gameObject.SetActive(true);
+            GameObject parentObject = button.gameObject.transform.parent.gameObject;
+            parentObject.transform.GetChild(0).gameObject.SetActive(false);
         }
     }
 
