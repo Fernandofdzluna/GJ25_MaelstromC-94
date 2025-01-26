@@ -27,6 +27,13 @@ public class creditos2 : MonoBehaviour
 
     void Start()
     {
+        /*
+        if (GUI.Button(new Rect(125, 0, 100, 50), "Lock Cursor"))
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        */
+        Cursor.lockState = CursorLockMode.None;
         // Obtener el componente AudioSource del GameObject
         audioSource = GetComponent<AudioSource>();
         remainingTime = gameDuration;
