@@ -471,7 +471,7 @@ namespace StarterAssets
 			starterAssetsInputs.enabled = false;
 			animatorPlayer.enabled = true;
 			animatorPlayer.SetTrigger("Death");
-			gameManager.EndGame();
+			gameManager.EndGame(false);
 			this.enabled = false;
 		}
 

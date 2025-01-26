@@ -53,6 +53,7 @@ public class GameManager : MonoBehaviour
             visorTutoBombonas.SetActive(false);
             GameObject padreCanvas = visorTutoBombonas.transform.parent.gameObject;
             padreCanvas.transform.GetChild(2).gameObject.SetActive(true);
+            EndGame(true);
         }
     }
 
@@ -68,9 +69,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void EndGame()
+    public void EndGame(bool gameCompleted)
     {
-        StartCoroutine(finishGame());
+        if (gameCompleted)
+        {
+            lucesEmergencia[] lights = FindObjectsByType<lucesEmergencia>(FindObjectsSortMode.None);
+            for (int i = 0; i < lights.Length; i++)
+            {
+                lights[i].emergencyLight.color = Color.green;
+            }
+        }
+        else
+        {
+            StartCoroutine(finishGame());
+        }
     }
 
     IEnumerator finishGame()

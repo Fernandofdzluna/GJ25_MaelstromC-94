@@ -6,6 +6,8 @@ public class bombonasVFX : MonoBehaviour
     GameObject aguaScene;
     bool bajoAgua;
 
+    public GameObject[] burbujasPistas;
+
     private void Awake()
     {
         bombonaVFX = this.gameObject.transform.GetChild(0).gameObject;
@@ -39,5 +41,13 @@ public class bombonasVFX : MonoBehaviour
     void changeVFXState(bool isActive)
     {
         bombonaVFX.SetActive (isActive);
+    }
+
+    public void makePistasVisible()
+    {
+        for(int i = 0; i < burbujasPistas.Length; i++)
+        {
+            burbujasPistas[i].gameObject.SetActive (true);
+        }
     }
 }
