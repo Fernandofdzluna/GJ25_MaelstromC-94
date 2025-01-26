@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class endLastCinematic : MonoBehaviour
 {
-    public AudioClip uno, dos, tres, cuatro;
+    public AudioClip uno, dos, tres, cuatro, cinco;
 
     public void ChangeScene()
     {
@@ -17,16 +17,20 @@ public class endLastCinematic : MonoBehaviour
     }
     public void PistaAudio2()
     {
-        SoundFXManager.instance.PlaySoundFXCLip(dos, transform, 1f);
+        SoundFXManager.instance.PlaySoundFXCLip(dos, transform, 0.7f);
     }
     public void PistaAudio3()
     {
-        SoundFXManager.instance.PlaySoundFXCLip(tres, transform, 1f);
+        SoundFXManager.instance.PlaySoundFXCLip(tres, transform, 0.9f);
     }
 
     public void PistaAudio4()
     {
         SoundFXManager.instance.PlaySoundFXCLip(cuatro, transform, 1f);
+    }
+    public void PistaAudio5()
+    {
+        SoundFXManager.instance.PlaySoundFXCLip(cinco, transform, 1f);
     }
 
     IEnumerator waitScene()

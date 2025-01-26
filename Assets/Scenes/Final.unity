@@ -608,10 +608,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bb60d3b6d9b13c4582de66185456a0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uno: {fileID: 0}
+  uno: {fileID: 8300000, guid: ca58677eb7a13f44482ca01f03c9d030, type: 3}
   dos: {fileID: 8300000, guid: 5f95b0a7006d5ff488a239da91f2d930, type: 3}
   tres: {fileID: 8300000, guid: 894f7c8ef05645648b2bf8b944a2c358, type: 3}
   cuatro: {fileID: 8300000, guid: af9d7e2de95c8534a9f24f0d811ae650, type: 3}
+  cinco: {fileID: 8300000, guid: 25a0d5a7b2040c64f9e69f85218c4ce1, type: 3}
 --- !u!4 &529810786 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 09e7c5447a815424691a8858b07c1bae, type: 3}
@@ -940,10 +941,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bb60d3b6d9b13c4582de66185456a0e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uno: {fileID: 0}
-  dos: {fileID: 0}
-  tres: {fileID: 0}
-  cuatro: {fileID: 0}
+  uno: {fileID: 8300000, guid: ca58677eb7a13f44482ca01f03c9d030, type: 3}
+  dos: {fileID: 8300000, guid: 5f95b0a7006d5ff488a239da91f2d930, type: 3}
+  tres: {fileID: 8300000, guid: 894f7c8ef05645648b2bf8b944a2c358, type: 3}
+  cuatro: {fileID: 8300000, guid: af9d7e2de95c8534a9f24f0d811ae650, type: 3}
+  cinco: {fileID: 8300000, guid: 25a0d5a7b2040c64f9e69f85218c4ce1, type: 3}
 --- !u!1001 &1156518053
 PrefabInstance:
   m_ObjectHideFlags: 0
