@@ -6,8 +6,6 @@ public class bombonasVFX : MonoBehaviour
     GameObject aguaScene;
     bool bajoAgua;
 
-    public GameObject[] burbujasPistas;
-
     private void Awake()
     {
         bombonaVFX = this.gameObject.transform.GetChild(0).gameObject;
@@ -22,7 +20,6 @@ public class bombonasVFX : MonoBehaviour
         {
             if (bombonaVFX.transform.position.y + 0.2f < aguaScene.transform.position.y)
             {
-                Debug.Log("Bombona por debajo de agua");
                 changeVFXState(true);
                 bajoAgua = true;
             }
@@ -31,7 +28,6 @@ public class bombonasVFX : MonoBehaviour
         {
             if (bombonaVFX.transform.position.y + 0.2f >= aguaScene.transform.position.y)
             {
-                Debug.Log("Bombona por encima de agua");
                 changeVFXState(false);
                 bajoAgua = false;
             }
@@ -41,13 +37,5 @@ public class bombonasVFX : MonoBehaviour
     void changeVFXState(bool isActive)
     {
         bombonaVFX.SetActive (isActive);
-    }
-
-    public void makePistasVisible()
-    {
-        for(int i = 0; i < burbujasPistas.Length; i++)
-        {
-            burbujasPistas[i].gameObject.SetActive (true);
-        }
     }
 }

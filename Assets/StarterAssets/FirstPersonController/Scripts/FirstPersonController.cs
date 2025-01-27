@@ -446,7 +446,7 @@ namespace StarterAssets
                 {
                     objectPicked = false;
                     hands.transform.DetachChildren();
-                    pickedObject.transform.position = this.gameObject.transform.position;
+                    pickedObject.transform.position = this.gameObject.transform.position + new Vector3(0,1.1f,0);
 
 					SoundFXManager.instance.PlaySoundFXCLip(audioItemEquipClip, transform, 1f);
 				}

@@ -20,7 +20,6 @@ public class creditos2 : MonoBehaviour
     private int totalPoints = 0;
     private float remainingTime;
     public AudioSource audioSource;
-    public ParticleSystem particleEffect;
     public Canvas canvas; // Asigna el Canvas en el Inspector
 
     private Dictionary<GameObject, Vector3> initialPositions = new Dictionary<GameObject, Vector3>();
@@ -33,7 +32,6 @@ public class creditos2 : MonoBehaviour
             Cursor.lockState = CursorLockMode.Locked;
         }
         */
-        Cursor.lockState = CursorLockMode.None;
         // Obtener el componente AudioSource del GameObject
         audioSource = GetComponent<AudioSource>();
         remainingTime = gameDuration;
@@ -59,6 +57,8 @@ public class creditos2 : MonoBehaviour
 
     void Update()
     {
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         foreach (var container in creditContainers)
         {
             if (container.activeSelf)
@@ -86,12 +86,6 @@ public class creditos2 : MonoBehaviour
             canvas.worldCamera,
             out Vector3 worldPosition
         );
-
-        // Mover el sistema de partículas a la posición calculada
-        particleEffect.transform.position = worldPosition;
-
-        // Reproducir el sistema de partículas
-        particleEffect.Play();
     }
 
     void OnButtonClicked(GameObject container, Button button)

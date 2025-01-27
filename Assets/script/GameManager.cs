@@ -122,7 +122,7 @@ public class GameManager : MonoBehaviour
 
     IEnumerator finishGame()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(10);
         SceneManager.LoadScene("creditos");
     }
 
