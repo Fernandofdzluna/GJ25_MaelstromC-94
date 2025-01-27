@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 #endif
 
 namespace StarterAssets
@@ -418,7 +419,8 @@ namespace StarterAssets
             if (objectPicked)
             {
                 RaycastHit hit;
-                if (Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.TransformDirection(Vector3.forward), out hit, 4) && hit.collider.tag == "MaquinaBombonas")
+                int mask = 1 << LayerMask.NameToLayer("SuelosEscaleras");
+                if (Physics.Raycast(_mainCamera.transform.position, _mainCamera.transform.TransformDirection(Vector3.forward), out hit, 4, ~mask) && hit.collider.tag == "MaquinaBombonas")
                 {
 					Animator animatorBox = hit.collider.GetComponent<Animator>();
 					if (animatorBox.GetBool("FirstBombona") == false)

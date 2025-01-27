@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2307620923295660622}
   - component: {fileID: 6957434010668092124}
   - component: {fileID: 8109586339993486362}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: BombonaBubbles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4856,7 +4856,7 @@ GameObject:
   - component: {fileID: 3815101037961838708}
   - component: {fileID: 7401417761289279550}
   - component: {fileID: 7855169281751571542}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: ObjetoInteractuable
   m_TagString: Interactuable
   m_Icon: {fileID: 0}
@@ -4945,7 +4945,7 @@ CapsuleCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 136
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
