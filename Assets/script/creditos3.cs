@@ -5,42 +5,38 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-public class creditos2 : MonoBehaviour
+public class creditos3 : MonoBehaviour
 {
     public List<GameObject> creditContainers;
+    public List<Transform> spawnPoints; // Lista de 4 puntos de inicio
     public float moveSpeed = 5f;
     public float maxY = 10f;
     public float displayTime = 2f;
+    public float buttonTextDelay = 1f; // Nuevo tiempo de espera antes de mostrar el texto
     public float horizontalSpeed = 1f;
     public float horizontalRange = 2f;
     public TextMeshProUGUI pointsText;
     public TextMeshProUGUI timerText;
     public float gameDuration = 30f;
-    public string nextSceneName; // Nombre de la escena a la que cambiar
+    public string nextSceneName;
     private int totalPoints = 0;
     private float remainingTime;
     public AudioSource audioSource;
-    public Canvas canvas; // Asigna el Canvas en el Inspector
-
-    private Dictionary<GameObject, Vector3> initialPositions = new Dictionary<GameObject, Vector3>();
+    public Canvas canvas;
 
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
         remainingTime = gameDuration;
+
         foreach (var container in creditContainers)
         {
             Button button = container.GetComponentInChildren<Button>();
             if (button != null)
             {
-                initialPositions[container] = container.transform.position;
                 button.onClick.AddListener(() => OnButtonClicked(container, button));
             }
-            container.transform.position = new Vector3(
-                container.transform.position.x + Random.Range(-horizontalRange, horizontalRange),
-                container.transform.position.y,
-                container.transform.position.z
-            );
+            SetRandomSpawnPoint(container); // Asigna un punto de inicio aleatorio
         }
 
         UpdatePointsText();
@@ -52,6 +48,7 @@ public class creditos2 : MonoBehaviour
     {
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
+
         foreach (var container in creditContainers)
         {
             if (container.activeSelf)
@@ -62,23 +59,10 @@ public class creditos2 : MonoBehaviour
 
                 if (container.transform.position.y >= maxY)
                 {
-                    ResetContainer(container);
+                    SetRandomSpawnPoint(container);
                 }
             }
         }
-    }
-    public void SpawnParticleEffect()
-    {
-        // Obtener la posición del clic en pantalla
-        Vector2 mousePosition = Input.mousePosition;
-
-        // Convertir la posición de pantalla a coordenadas del mundo
-        RectTransformUtility.ScreenPointToWorldPointInRectangle(
-            canvas.transform as RectTransform,
-            mousePosition,
-            canvas.worldCamera,
-            out Vector3 worldPosition
-        );
     }
 
     void OnButtonClicked(GameObject container, Button button)
@@ -88,31 +72,35 @@ public class creditos2 : MonoBehaviour
         {
             button.gameObject.SetActive(false);
             audioSource.Play();
-            SpawnParticleEffect();
+            //SpawnParticleEffect();
             StartCoroutine(ShowButtonAfterDelay(button));
         }
         AddPoints(100);
+        SetRandomSpawnPoint(container); // Mueve el contenedor a un nuevo punto aleatorio al hacer clic
     }
 
     IEnumerator ShowButtonAfterDelay(Button button)
     {
-        yield return new WaitForSeconds(displayTime);
+        yield return new WaitForSeconds(displayTime + buttonTextDelay); // Agrega la espera adicional
         if (button != null)
         {
+            /*
+            button.gameObject.SetActive(true);
+            button.transform.parent.GetChild(0).gameObject.SetActive(false);
+            */
             button.gameObject.SetActive(true);
             GameObject parentObject = button.gameObject.transform.parent.gameObject;
             parentObject.transform.GetChild(0).gameObject.SetActive(false);
         }
     }
 
-    void ResetContainer(GameObject container)
+    void SetRandomSpawnPoint(GameObject container)
     {
-        container.transform.position = initialPositions[container];
-        container.transform.position = new Vector3(
-            container.transform.position.x + Random.Range(-horizontalRange, horizontalRange),
-            container.transform.position.y,
-            container.transform.position.z
-        );
+        if (spawnPoints.Count > 0)
+        {
+            Transform randomSpawn = spawnPoints[Random.Range(0, spawnPoints.Count)];
+            container.transform.position = randomSpawn.position;
+        }
     }
 
     void AddPoints(int points)
@@ -146,15 +134,13 @@ public class creditos2 : MonoBehaviour
             UpdateTimerText();
         }
 
-        // Ocultar todos los botones y mostrar solo la puntuación final
         foreach (var container in creditContainers)
         {
             container.SetActive(false);
         }
-        timerText.gameObject.SetActive(false); // Ocultar el temporizador
+        timerText.gameObject.SetActive(false);
         pointsText.text = "Puntuación Final: " + totalPoints.ToString();
 
-        // Esperar 3 segundos antes de cambiar de escena
         yield return new WaitForSeconds(3f);
         SceneManager.LoadScene(nextSceneName);
     }
