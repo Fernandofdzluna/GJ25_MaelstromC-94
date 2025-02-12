@@ -9,7 +9,7 @@ using Unity.VisualScripting.FullSerializer.Internal;
 public class creditos3 : MonoBehaviour
 {
     public GameObject[] creditContainers;
-    Transform[] spawnPoints;
+    public Transform[] spawnPoints;
     bool[] spawnsSet;
     public float moveSpeed = 5f;
     public float maxY = 10f;
@@ -69,7 +69,7 @@ public class creditos3 : MonoBehaviour
 
                 if (container.transform.position.y >= maxY)
                 {
-                    //SetRandomSpawnPoint(container);
+                    SetRandomSpawnPoint(container);
                 }
             }
         }
@@ -86,7 +86,7 @@ public class creditos3 : MonoBehaviour
             StartCoroutine(ShowButtonAfterDelay(button));
         }
         AddPoints(100);
-        //SetRandomSpawnPoint(container); // Mueve el contenedor a un nuevo punto aleatorio al hacer clic
+        SetRandomSpawnPoint(container); // Mueve el contenedor a un nuevo punto aleatorio al hacer clic
     }
 
     IEnumerator ShowButtonAfterDelay(Button button)
@@ -94,10 +94,6 @@ public class creditos3 : MonoBehaviour
         yield return new WaitForSeconds(displayTime + buttonTextDelay); // Agrega la espera adicional
         if (button != null)
         {
-            /*
-            button.gameObject.SetActive(true);
-            button.transform.parent.GetChild(0).gameObject.SetActive(false);
-            */
             button.gameObject.SetActive(true);
             GameObject parentObject = button.gameObject.transform.parent.gameObject;
             parentObject.transform.GetChild(0).gameObject.SetActive(false);

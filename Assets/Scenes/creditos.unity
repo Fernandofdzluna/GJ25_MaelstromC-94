@@ -2322,8 +2322,8 @@ MonoBehaviour:
   - {fileID: 1565586523}
   spawnPoints:
   - {fileID: 281094838}
-  - {fileID: 947583346}
   - {fileID: 1482211440}
+  - {fileID: 947583346}
   - {fileID: 247391023}
   - {fileID: 1370433421}
   moveSpeed: 80
