@@ -9,8 +9,8 @@ using Unity.VisualScripting.FullSerializer.Internal;
 public class creditos3 : MonoBehaviour
 {
     public GameObject[] creditContainers;
-    Transform[] spawnPoints;
-    bool[] spawnsSet;
+    Vector3[] spawnPoints;
+    int numDestroyed = 0;
     public float moveSpeed = 5f;
     public float maxY = 10f;
     public float displayTime = 2f;
@@ -31,12 +31,10 @@ public class creditos3 : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         remainingTime = gameDuration;
 
-        spawnPoints = new Transform[creditContainers.Length];
-        spawnsSet = new bool[creditContainers.Length];
+        spawnPoints = new Vector3[creditContainers.Length];
         for (int i = 0; i < creditContainers.Length; i++)
         {
-            spawnPoints[i] = creditContainers[i].transform;
-            spawnsSet[i] = false;
+            spawnPoints[i] = creditContainers[i].transform.position;
         }
 
         foreach (var container in creditContainers)
@@ -46,8 +44,8 @@ public class creditos3 : MonoBehaviour
             {
                 button.onClick.AddListener(() => OnButtonClicked(container, button));
             }
-            SetRandomSpawnPoint(container); // Asigna un punto de inicio aleatorio
         }
+        SetRandomSpawnPoint(); // Asigna un punto de inicio aleatorio
 
         UpdatePointsText();
         UpdateTimerText();
@@ -69,7 +67,12 @@ public class creditos3 : MonoBehaviour
 
                 if (container.transform.position.y >= maxY)
                 {
-                    //SetRandomSpawnPoint(container);
+                    container.gameObject.SetActive(false);
+                    numDestroyed++;
+                    if (numDestroyed >= creditContainers.Length)
+                    {
+                        SetRandomSpawnPoint();
+                    }
                 }
             }
         }
@@ -86,7 +89,6 @@ public class creditos3 : MonoBehaviour
             StartCoroutine(ShowButtonAfterDelay(button));
         }
         AddPoints(100);
-        //SetRandomSpawnPoint(container); // Mueve el contenedor a un nuevo punto aleatorio al hacer clic
     }
 
     IEnumerator ShowButtonAfterDelay(Button button)
@@ -94,27 +96,34 @@ public class creditos3 : MonoBehaviour
         yield return new WaitForSeconds(displayTime + buttonTextDelay); // Agrega la espera adicional
         if (button != null)
         {
-            /*
-            button.gameObject.SetActive(true);
-            button.transform.parent.GetChild(0).gameObject.SetActive(false);
-            */
             button.gameObject.SetActive(true);
             GameObject parentObject = button.gameObject.transform.parent.gameObject;
             parentObject.transform.GetChild(0).gameObject.SetActive(false);
+            parentObject.SetActive(false);
+            numDestroyed++;
+            if (numDestroyed >= creditContainers.Length)
+            {
+                SetRandomSpawnPoint();
+            }
         }
     }
 
-    void SetRandomSpawnPoint(GameObject container)
+    void SetRandomSpawnPoint()
     {
-        int randomNum = Random.Range(0, spawnPoints.Length);
-        Debug.Log(randomNum);
-        if (spawnsSet[randomNum])
+        numDestroyed = 0;
+        for (int i = 0; i < creditContainers.Length; i++)
         {
-            container.transform.position = spawnPoints[randomNum].position;
+            int randomNum = Random.Range(0, creditContainers.Length);
+
+            Vector3 tempPosition = spawnPoints[i];
+            spawnPoints[i] = spawnPoints[randomNum];
+            spawnPoints[randomNum] = tempPosition;
         }
-        else
+
+        for (int i = 0; i < creditContainers.Length; i++)
         {
-            SetRandomSpawnPoint(container);
+            creditContainers[i].transform.position = spawnPoints[i];
+            creditContainers[i].gameObject.SetActive(true);
         }
     }
 
