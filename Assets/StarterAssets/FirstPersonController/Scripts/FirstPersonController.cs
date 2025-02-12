@@ -204,7 +204,6 @@ namespace StarterAssets
             if (objectPicked)
 			{
 				pickedObject.transform.localPosition = Vector3.zero;
-				pickedObject.transform.eulerAngles = Vector3.zero;
 			}
 		}
 
@@ -447,8 +446,9 @@ namespace StarterAssets
                     objectPicked = false;
                     hands.transform.DetachChildren();
                     pickedObject.transform.position = this.gameObject.transform.position + new Vector3(0,1.1f,0);
+                    pickedObject.transform.eulerAngles = Vector3.zero;
 
-					SoundFXManager.instance.PlaySoundFXCLip(audioItemEquipClip, transform, 1f);
+                    SoundFXManager.instance.PlaySoundFXCLip(audioItemEquipClip, transform, 1f);
 				}
             }
         }

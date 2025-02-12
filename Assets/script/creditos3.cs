@@ -4,11 +4,13 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using Unity.VisualScripting.FullSerializer.Internal;
 
 public class creditos3 : MonoBehaviour
 {
-    public List<GameObject> creditContainers;
-    public List<Transform> spawnPoints; // Lista de 4 puntos de inicio
+    public GameObject[] creditContainers;
+    Transform[] spawnPoints;
+    bool[] spawnsSet;
     public float moveSpeed = 5f;
     public float maxY = 10f;
     public float displayTime = 2f;
@@ -28,6 +30,14 @@ public class creditos3 : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         remainingTime = gameDuration;
+
+        spawnPoints = new Transform[creditContainers.Length];
+        spawnsSet = new bool[creditContainers.Length];
+        for (int i = 0; i < creditContainers.Length; i++)
+        {
+            spawnPoints[i] = creditContainers[i].transform;
+            spawnsSet[i] = false;
+        }
 
         foreach (var container in creditContainers)
         {
@@ -59,7 +69,7 @@ public class creditos3 : MonoBehaviour
 
                 if (container.transform.position.y >= maxY)
                 {
-                    SetRandomSpawnPoint(container);
+                    //SetRandomSpawnPoint(container);
                 }
             }
         }
@@ -76,7 +86,7 @@ public class creditos3 : MonoBehaviour
             StartCoroutine(ShowButtonAfterDelay(button));
         }
         AddPoints(100);
-        SetRandomSpawnPoint(container); // Mueve el contenedor a un nuevo punto aleatorio al hacer clic
+        //SetRandomSpawnPoint(container); // Mueve el contenedor a un nuevo punto aleatorio al hacer clic
     }
 
     IEnumerator ShowButtonAfterDelay(Button button)
@@ -96,10 +106,15 @@ public class creditos3 : MonoBehaviour
 
     void SetRandomSpawnPoint(GameObject container)
     {
-        if (spawnPoints.Count > 0)
+        int randomNum = Random.Range(0, spawnPoints.Length);
+        Debug.Log(randomNum);
+        if (spawnsSet[randomNum])
         {
-            Transform randomSpawn = spawnPoints[Random.Range(0, spawnPoints.Count)];
-            container.transform.position = randomSpawn.position;
+            container.transform.position = spawnPoints[randomNum].position;
+        }
+        else
+        {
+            SetRandomSpawnPoint(container);
         }
     }
 
