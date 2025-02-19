@@ -77,6 +77,8 @@ namespace StarterAssets
 		public bool ahogandose = false;
 		public bool bombonasCompletas = false;
 
+		GameObject player;
+
 #if ENABLE_INPUT_SYSTEM
         private PlayerInput _playerInput;
 #endif
@@ -112,7 +114,7 @@ namespace StarterAssets
 			{
 				_mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
 			}
-
+			player = GameObject.FindGameObjectWithTag("Player");
 			hands = _mainCamera.gameObject.transform.GetChild(0).gameObject.transform;
             colliderPlayer = this.gameObject.GetComponent<Collider>();
 			onEscalera = false;
@@ -205,7 +207,7 @@ namespace StarterAssets
 			{
 				pickedObject.transform.localPosition = Vector3.zero;
 			}
-		}
+        }
 
 		private void LateUpdate()
 		{
@@ -325,7 +327,8 @@ namespace StarterAssets
 							pickedObject = hit.collider.gameObject;
 							pickedObject.transform.parent = hands.transform;
 							objectPicked = true;
-						}
+                            player.transform.GetChild(1).gameObject.SetActive(false);
+                        }
                         break;
 					case "Escalera":
 						if (tecla == "E")
@@ -429,7 +432,9 @@ namespace StarterAssets
 						Destroy(pickedObject);
 						gameManager.UpgradeBombonasNumber(1);
 
-						SoundFXManager.instance.PlaySoundFXCLip(audioBotellaClip, transform, 0.5f);
+                        player.transform.GetChild(1).gameObject.SetActive(true);
+
+                        SoundFXManager.instance.PlaySoundFXCLip(audioBotellaClip, transform, 0.5f);
 					}
 					else if(animatorBox.GetBool("SecBombona") == false)
 					{
@@ -437,8 +442,9 @@ namespace StarterAssets
                         objectPicked = false;
                         Destroy(pickedObject);
                         gameManager.UpgradeBombonasNumber(1);
+                        player.transform.GetChild(1).gameObject.SetActive(true);
 
-						SoundFXManager.instance.PlaySoundFXCLip(audioBotellaClip, transform, 0.5f);
+                        SoundFXManager.instance.PlaySoundFXCLip(audioBotellaClip, transform, 0.5f);
 					}
                 }
 				else
@@ -447,6 +453,7 @@ namespace StarterAssets
                     hands.transform.DetachChildren();
                     pickedObject.transform.position = this.gameObject.transform.position + new Vector3(0,1.1f,0);
                     pickedObject.transform.eulerAngles = Vector3.zero;
+                    player.transform.GetChild(1).gameObject.SetActive(true);
 
                     SoundFXManager.instance.PlaySoundFXCLip(audioItemEquipClip, transform, 1f);
 				}
