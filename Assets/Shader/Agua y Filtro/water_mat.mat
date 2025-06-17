@@ -73,13 +73,13 @@ Material:
     m_Floats:
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _depth: 1
-    - _distance: 2
-    - _peak_sharpness: 0.3
-    - _wave_height: 0.2
-    - _wave_length: 16
+    - _depth: 0.001
+    - _distance: 0.01
+    - _peak_sharpness: 10000
+    - _wave_height: 0.001
+    - _wave_length: 0.1
     m_Colors:
-    - _Color: {r: 0.32729787, g: 0.7341558, b: 0.8716981, a: 0.2901961}
+    - _Color: {r: 0.3272977, g: 0.7341558, b: 0.8716981, a: 1}
     - _wave_direction: {r: 1, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
