@@ -7,10 +7,11 @@ using TMPro;
 public class botones : MonoBehaviour
 {
     // Empty Object para opciones
-    public GameObject optionsMenu;
+    public GameObject optionsMenu, pausaMenu;
+    //public static bool enPausa = false;
 
     // Otro Empty Object a activar/desactivar
-    public GameObject alternateMenu;
+    public GameObject alternateMenu, panelConfirmacion;
     public Slider sliderB, sliderV;
     public float sliderValueB, sliderValueV;
     public Image panelBrillo, imagenMute;
@@ -23,6 +24,11 @@ public class botones : MonoBehaviour
     public Resolution[] resoluciones;
 
     public AudioClip boton;
+
+    [Header("Lista de oraciones")]
+    public string[] oraciones;  // Aquí agregas todas las frases posibles
+    public TextMeshProUGUI textoUI;  // Arrastrar el TextMeshProUGUI desde el inspector
+
 
     // Método para cambiar de escena
 
@@ -41,12 +47,16 @@ public class botones : MonoBehaviour
         RevisarResolucion();
         sliderV.value = PlayerPrefs.GetFloat("volumenAudio", 0.5f);
         AudioListener.volume = sliderV.value;
-        RevisarMute();
+        //RevisarMute();
     }
 
-    public void RevisarMute()
+    public void ChangeSlider2(float valor)
     {
-        if(sliderValueV == 0)
+        sliderValueV = valor;
+        PlayerPrefs.SetFloat("volumen", sliderValueV);
+        AudioListener.volume = sliderV.value;
+        //RevisarMute();
+        if (sliderValueV == 0)
         {
             imagenMute.enabled = true;
         }
@@ -55,19 +65,24 @@ public class botones : MonoBehaviour
             imagenMute.enabled = false;
         }
     }
-    public void ChangeSlider2(float valor)
+
+    public void ChangeSlider()
     {
-        sliderValueV = valor;
-        PlayerPrefs.SetFloat("volumen", sliderValueV);
-        AudioListener.volume = sliderV.value;
-        RevisarMute();
+        sliderB.onValueChanged.AddListener(AjustarBrillo);
+        sliderB.value = 1f; // Brillo inicial máximo
+        AjustarBrillo(sliderB.value);
     }
 
-    public void ChangeSlider(float valor)
+    // Método que ajusta el brillo
+    public void AjustarBrillo(float valor)
     {
-        sliderValueB = valor;
-        PlayerPrefs.SetFloat("brillo", sliderValueB);
-        panelBrillo.color = new Color(panelBrillo.color.r, panelBrillo.color.g, panelBrillo.color.b, sliderB.value);
+        if (panelBrillo == null) return;
+
+        // El valor del slider va de 0 (oscuro) a 1 (brillo máximo)
+        // Ajustamos la alpha del overlay: alpha = 1 - valor
+        Color c = panelBrillo.color;
+        c.a = 1f - valor;
+        panelBrillo.color = c;
     }
 
     public void LoadScene()
@@ -107,6 +122,17 @@ public class botones : MonoBehaviour
         Application.Quit();
     }
 
+    public void ConfirmarSalir()
+    {
+        SoundFXManager.instance.PlaySoundFXCLip(boton, transform, 1f);
+        // Detectamos si el objeto se desactiva
+        if (!panelConfirmacion.activeInHierarchy)
+        {
+            CambiarOracion();
+            panelConfirmacion.SetActive(true); // Lo volvemos a activar si quieres que se repita varias veces
+        }
+    }
+
     public void PantallaCOmpletaCheck(bool pantallaCompletita)
     {
         Screen.fullScreen = pantallaCompletita;
@@ -141,5 +167,51 @@ public class botones : MonoBehaviour
 
         Resolution resolution = resoluciones[indiceResolucion];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
+    }
+
+    public void ContinuarJugando()
+    {
+        optionsMenu.SetActive(false);
+        pausaMenu.SetActive(false);
+        Time.timeScale = 1f;
+        ActivarCursor(false);
+    }
+
+    public void PausarJuego()
+    {
+        //optionsMenu.SetActive(true);
+        pausaMenu.SetActive(true);
+        Time.timeScale = 0f;
+        ActivarCursor(true);
+    }
+
+    private void ActivarCursor(bool activado)
+    {
+        Cursor.visible = activado; // Mostrar u ocultar cursor
+        Cursor.lockState = activado ? CursorLockMode.None : CursorLockMode.Locked; // Bloquear o liberar
+    }
+
+    public void VolverAlMenuInicial()
+    {
+        SoundFXManager.instance.PlaySoundFXCLip(boton, transform, 1f);
+        SceneManager.LoadScene("inicio");
+    }
+
+    public void CancelarSalir()
+    {
+        SoundFXManager.instance.PlaySoundFXCLip(boton, transform, 1f);
+        panelConfirmacion.SetActive(false);
+    }
+
+    private void CambiarOracion()
+    {
+        if (oraciones.Length == 0) return;
+
+        // Elegir una oración aleatoria
+        int indice = Random.Range(0, oraciones.Length);
+        string oracionSeleccionada = oraciones[indice];
+
+        // Mostrarla en TextMeshPro
+        textoUI.text = oracionSeleccionada;
     }
 }

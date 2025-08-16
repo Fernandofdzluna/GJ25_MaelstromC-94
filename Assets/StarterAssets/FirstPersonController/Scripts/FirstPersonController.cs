@@ -88,6 +88,8 @@ namespace StarterAssets
 		public Aguantar aguantar_script;
 		private Animator animatorPlayer;
 		private GameManager gameManager;
+		public botones botones;
+		public static bool enPausa = false;
 
 		private const float _threshold = 0.01f;
 
@@ -212,7 +214,22 @@ namespace StarterAssets
 		private void LateUpdate()
 		{
 			CameraRotation();
-        }
+
+			if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Tab))
+			{
+				if (!enPausa)
+				{
+					botones.PausarJuego();
+					enPausa = true;
+				}
+				else
+				{
+					botones.ContinuarJugando();
+					enPausa = false;
+				}
+			}
+		}
+
 
         private void CameraRotation()
 		{
